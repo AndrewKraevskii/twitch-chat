@@ -13,7 +13,6 @@
 	let hiddenNicknames: string[] = [];
 	let customColor: UserNicknameColor = {};
 	let defaultColor = '';
-	//http://localhost:3000/BruhaBruh?hidden=bruhabruh_bot&defaultColor=8cf2a5&custom=Ark_Hentan%3Afb7185%3Aef4444%2CBruhaBruh%3A68d8ff%3A6b90ff%2Chyperspace42_%3Af472b6%3Aaf4bfd
 </script>
 
 <h1 class="header">Chat link generator</h1>
