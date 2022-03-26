@@ -5,7 +5,10 @@
 	export let channel = '';
 </script>
 
-<label class="field">
-	<h2 class="field__label">Channel</h2>
-	<input class="input" bind:value={channel} />
-</label>
+<input class="channel-input" bind:value={channel} />
+
+<style>
+	.channel-input {
+		width: 100%;
+	}
+</style>

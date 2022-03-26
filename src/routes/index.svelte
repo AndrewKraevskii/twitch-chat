@@ -1,11 +1,12 @@
 <script lang="ts" context="module">
 	import type { UserNicknameColor } from '$types/nickname';
 	import ChannelInput from '@components/ChannelInput.svelte';
-	import CustomColor from '@components/CustomColor.svelte';
-	import DefaultColor from '@components/DefaultColor.svelte';
+	import CustomColorInput from '@components/CustomColorInput.svelte';
+	import DefaultColorInput from '@components/DefaultColorInput.svelte';
+	import Field from '@components/Field.svelte';
 	import GeneratedLink from '@components/GeneratedLink.svelte';
-	import HiddenNicknames from '@components/HiddenNicknames.svelte';
-	import LoadLink from '@components/LoadLink.svelte';
+	import HiddenNicknamesInput from '@components/HiddenNicknamesInput.svelte';
+	import LoadLinkInput from '@components/LoadLinkInput.svelte';
 </script>
 
 <script lang="ts">
@@ -15,21 +16,46 @@
 	let defaultColor = '';
 </script>
 
-<h1 class="header">Chat link generator</h1>
+<main class="container">
+	<h1 class="heading">Chat link generator</h1>
 
-<LoadLink bind:channel bind:hiddenNicknames bind:customColor bind:defaultColor />
+	<Field label="Channel">
+		<ChannelInput bind:channel />
+	</Field>
 
-<ChannelInput bind:channel />
+	<Field label="Default color">
+		<DefaultColorInput bind:defaultColor />
+	</Field>
 
-<HiddenNicknames bind:hiddenNicknames />
+	<Field label="Hidden nicknames">
+		<HiddenNicknamesInput bind:hiddenNicknames />
+	</Field>
 
-<DefaultColor bind:defaultColor />
+	<Field label="Custom color nicknames">
+		<CustomColorInput bind:customColor />
+	</Field>
 
-<CustomColor bind:customColor />
+	<Field label="Chat link">
+		<GeneratedLink {channel} {hiddenNicknames} {defaultColor} {customColor} />
+	</Field>
 
-<GeneratedLink {channel} {hiddenNicknames} {defaultColor} {customColor} />
+	<Field label="Load config from link">
+		<LoadLinkInput bind:channel bind:hiddenNicknames bind:customColor bind:defaultColor />
+	</Field>
+</main>
 
 <style>
+	.container {
+		max-width: 1280px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
+
+	.heading {
+		margin-bottom: 1rem;
+	}
+
+	/* 
 	:global(.input) {
 		font-size: 1.1rem;
 		padding: 0.2rem 0.4rem;
@@ -80,5 +106,5 @@
 
 	:global(.row > *:last-child) {
 		margin-right: 0;
-	}
+	} */
 </style>

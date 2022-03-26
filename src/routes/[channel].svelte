@@ -5,6 +5,7 @@
 	import { replaceBetween } from '$lib/replaceBetween';
 	import badges from '$lib/stores/badges';
 	import chat from '$lib/stores/chat';
+	import UrlParser from '$lib/urlParser';
 	import type { TwitchBadge } from '$types/badge';
 	import type { NewMessageResponse } from '$types/twitch';
 	import Message from '@components/Message.svelte';
@@ -81,30 +82,16 @@
 	};
 
 	const loadNicknameConfigFromHref = () => {
-		const url = new URL(window.location.href);
+		const urlParser = new UrlParser(window.location.href);
 
-		const hidden = url.searchParams.get('hidden');
-		if (!!hidden) nicknameConfig.setHidden(hidden.split(','));
-
-		const defaultColor = url.searchParams.get('defaultColor');
-		if (!!defaultColor) nicknameConfig.setDefaultColor('#' + defaultColor);
-
-		const custom = url.searchParams.get('custom');
-		if (!!custom) {
-			const nicknameColors = custom.split(',');
-			nicknameColors.map((nicknameColor) => {
-				const [nickname, colorOrStart, end] = nicknameColor.split(':');
-
-				if (!end) {
-					nicknameConfig.addCustomColor(nickname, '#' + colorOrStart);
-				} else {
-					nicknameConfig.addCustomColor(nickname, undefined, {
-						start: '#' + colorOrStart,
-						end: '#' + end
-					});
-				}
-			});
+		if (urlParser.getHiddenNicknames().length !== 0) {
+			nicknameConfig.setHidden(urlParser.getHiddenNicknames());
 		}
+
+		if (!!urlParser.getDefaultColor()) nicknameConfig.setDefaultColor(urlParser.getDefaultColor());
+
+		if (!!urlParser.getNicknameColors())
+			nicknameConfig.setCustomColor(urlParser.getNicknameColors());
 	};
 
 	onMount(async () => {
@@ -158,17 +145,15 @@
 		color: #fafafa;
 	}
 
-	:global(body) {
-		display: flex !important;
-		flex-direction: column-reverse !important;
-		height: 100vh !important;
-	}
-
 	:global(.chat-container > *) {
 		margin-top: 0.5rem;
 	}
 
 	:global(.chat-container > *:last-child) {
 		margin-top: 0rem;
+	}
+
+	:global(body) {
+		padding: 1.5rem !important;
 	}
 </style>

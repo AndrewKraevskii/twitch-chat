@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env';
+	import UrlEncoder from '$lib/urlEncoder';
 	import type { UserNicknameColor } from '$types/nickname';
 </script>
 
@@ -14,33 +15,9 @@
 	const updateLink = () => {
 		if (!browser) return;
 
-		const url = new URL(window.location.origin);
+		const urlEncoder = new UrlEncoder(channel, hiddenNicknames, defaultColor, customColor);
 
-		if (channel) {
-			url.pathname = '/' + channel;
-		}
-		if (hiddenNicknames.length !== 0) {
-			url.searchParams.append('hidden', hiddenNicknames.join(','));
-		}
-
-		if (defaultColor) {
-			url.searchParams.append('defaultColor', defaultColor.replace('#', ''));
-		}
-
-		if (Object.keys(customColor).length !== 0) {
-			let v = [];
-			Object.keys(customColor).forEach((nickname) => {
-				const color = customColor[nickname];
-				if (typeof color === 'string') {
-					v.push(`${nickname}:${color.replace('#', '')}`);
-				} else {
-					v.push(`${nickname}:${color.start.replace('#', '')}:${color.end.replace('#', '')}`);
-				}
-			});
-
-			url.searchParams.append('custom', v.join(','));
-		}
-		link = url.href;
+		link = urlEncoder.getLink().href;
 	};
 
 	$: browser &&
@@ -51,7 +28,10 @@
 		updateLink();
 </script>
 
-<label class="field">
-	<h2 class="field__label">Link</h2>
-	<input class="link input" value={link} readonly />
-</label>
+<input class="generated-link" value={link} readonly />
+
+<style>
+	.generated-link {
+		width: 100%;
+	}
+</style>

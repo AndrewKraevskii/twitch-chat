@@ -49,6 +49,7 @@ const createNicknameConfig = () => {
 				}));
 			}
 		},
+		setCustomColor: (customColors: UserNicknameColor) => update((v) => ({ ...v, customColors })),
 		setHidden: (hidden: string[]) => update((v) => ({ ...v, hidden })),
 		reset: () => set(initialState)
 	};
