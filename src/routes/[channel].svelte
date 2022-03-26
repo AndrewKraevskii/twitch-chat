@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env';
 	import fetchAllEmotes from '$lib/fetchEmotes';
-	import { hideNicknames } from '$lib/nicknameConfig';
+	import nicknameConfig from '$lib/nicknameConfig';
 	import { replaceBetween } from '$lib/replaceBetween';
 	import badges from '$lib/stores/badges';
 	import chat from '$lib/stores/chat';
@@ -52,7 +52,7 @@
 	}) => {
 		if (
 			message.startsWith('!') ||
-			hideNicknames.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
+			$nicknameConfig.hidden.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
 			isSelf
 		)
 			return;
@@ -80,8 +80,37 @@
 		chat.remove(targetMessageId);
 	};
 
+	const loadNicknameConfigFromHref = () => {
+		const url = new URL(window.location.href);
+
+		const hidden = url.searchParams.get('hidden');
+		if (!!hidden) nicknameConfig.setHidden(hidden.split(','));
+
+		const defaultColor = url.searchParams.get('defaultColor');
+		if (!!defaultColor) nicknameConfig.setDefaultColor('#' + defaultColor);
+
+		const custom = url.searchParams.get('custom');
+		if (!!custom) {
+			const nicknameColors = custom.split(',');
+			nicknameColors.map((nicknameColor) => {
+				const [nickname, colorOrStart, end] = nicknameColor.split(':');
+
+				if (!end) {
+					nicknameConfig.addCustomColor(nickname, '#' + colorOrStart);
+				} else {
+					nicknameConfig.addCustomColor(nickname, undefined, {
+						start: '#' + colorOrStart,
+						end: '#' + end
+					});
+				}
+			});
+		}
+	};
+
 	onMount(async () => {
 		if (!browser) return;
+
+		loadNicknameConfigFromHref();
 
 		badges.set(tbadges);
 
@@ -109,7 +138,7 @@
 
 {#if $chat.length !== 0}
 	<main class="chat-container" transition:fade>
-		{#each $chat.sort((a, b) => new Date(b.id).getTime() - new Date(a.id).getTime()) as msg (msg.id)}
+		{#each $chat.sort((a, b) => b.time - a.time) as msg (msg.id)}
 			<Message chatMessage={msg} />
 		{/each}
 	</main>
@@ -127,6 +156,12 @@
 		flex-direction: column-reverse;
 		align-items: stretch;
 		color: #fafafa;
+	}
+
+	:global(body) {
+		display: flex !important;
+		flex-direction: column-reverse !important;
+		height: 100vh !important;
 	}
 
 	:global(.chat-container > *) {

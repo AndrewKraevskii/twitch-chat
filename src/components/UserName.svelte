@@ -1,6 +1,7 @@
 <script lang="ts">
 	import hexToHSL from '$lib/hexToHsl';
-	import { customNicknames } from '$lib/nicknameConfig';
+	import nicknameConfig from '$lib/nicknameConfig';
+	import type { ColorGradient } from '$types/nickname';
 	import Badges from './Badges.svelte';
 	import Separator from './Separator.svelte';
 
@@ -8,22 +9,37 @@
 	export let color: string | null;
 	export let nickname: string;
 
-	let nicknameStartColor = '#8CF2A5';
-	let nicknameEndColor = '#8CF2A5';
+	let nicknameStartColor: string | undefined = undefined;
+	let nicknameEndColor: string | undefined = undefined;
+
+	const add = 5;
+	const multy = 1.5;
+	const step = 5;
 
 	const updateNicknameColors = () => {
+		const customNicknames = $nicknameConfig.customColors;
 		if (Object.keys(customNicknames).includes(nickname)) {
-			nicknameStartColor = customNicknames[nickname].start;
-			nicknameEndColor = customNicknames[nickname].end;
+			if (typeof customNicknames !== 'string') {
+				const colors = customNicknames[nickname] as ColorGradient;
+				nicknameStartColor = colors.start;
+				nicknameEndColor = colors.end;
+			} else {
+				nicknameStartColor = customNicknames[nickname] as string;
+				nicknameEndColor = customNicknames[nickname] as string;
+			}
 			return;
 		}
 
 		if (color === null) return;
 
-		const { hue, saturation, lightness } = hexToHSL(color ?? '#AB72F4');
+		const { hue, saturation, lightness } = hexToHSL(color);
 
-		nicknameStartColor = `hsl(${hue}, ${saturation}%, ${lightness - 5 < 0 ? 0 : lightness - 5}%)`;
-		nicknameEndColor = `hsl(${hue}, ${saturation}%, ${lightness + 5 > 100 ? 100 : lightness + 5}%)`;
+		nicknameStartColor = `hsl(${hue}, ${saturation}%, ${
+			lightness + add * multy > 100 - step ? 100 - step : lightness + add * multy
+		}%)`;
+		nicknameEndColor = `hsl(${hue}, ${saturation}%, ${
+			lightness + (add + step) * multy > 100 ? 100 : lightness + (add + step) * multy
+		}%)`;
 	};
 
 	$: color && updateNicknameColors();
@@ -32,7 +48,11 @@
 <div class="username">
 	<Badges {userBadges} /><span
 		class="name"
-		style={`background: linear-gradient(to right, ${nicknameStartColor}, ${nicknameEndColor}); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent`}
+		style={`background: linear-gradient(to right, ${
+			nicknameStartColor ?? $nicknameConfig.defaultColor
+		}, ${
+			nicknameEndColor ?? $nicknameConfig.defaultColor
+		}); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent`}
 		>{nickname}</span
 	><Separator />
 </div>

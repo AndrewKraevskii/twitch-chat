@@ -8,12 +8,10 @@ const createChat = () => {
 
 	return {
 		subscribe,
-		add: (msg: ChatMessage) => {
+		add: (msg: Omit<ChatMessage, 'time'>) => {
 			update((v) => {
-				const newArr = [...v, msg];
-				return newArr
-					.sort((a, b) => new Date(b.id).getTime() - new Date(a.id).getTime())
-					.slice(0, 20);
+				const newArr = [...v, { ...msg, time: new Date().getTime() }];
+				return newArr.sort((a, b) => b.time - a.time).slice(0, 20);
 			});
 		},
 		remove: (messageId: string) => {
