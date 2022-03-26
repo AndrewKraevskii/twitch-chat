@@ -4,6 +4,7 @@
 	import CustomColorInput from '@components/CustomColorInput.svelte';
 	import DefaultColorInput from '@components/DefaultColorInput.svelte';
 	import Field from '@components/Field.svelte';
+	import Footer from '@components/Footer.svelte';
 	import GeneratedLink from '@components/GeneratedLink.svelte';
 	import HiddenNicknamesInput from '@components/HiddenNicknamesInput.svelte';
 	import LoadLinkInput from '@components/LoadLinkInput.svelte';
@@ -15,6 +16,10 @@
 	let customColor: UserNicknameColor = {};
 	let defaultColor = '';
 </script>
+
+<svelte:head>
+	<title>BruhChat</title>
+</svelte:head>
 
 <main class="container">
 	<h1 class="heading">Chat link generator</h1>
@@ -42,6 +47,8 @@
 	<Field label="Load config from link">
 		<LoadLinkInput bind:channel bind:hiddenNicknames bind:customColor bind:defaultColor />
 	</Field>
+
+	<Footer />
 </main>
 
 <style>
@@ -54,57 +61,4 @@
 	.heading {
 		margin-bottom: 1rem;
 	}
-
-	/* 
-	:global(.input) {
-		font-size: 1.1rem;
-		padding: 0.2rem 0.4rem;
-		width: 100%;
-	}
-
-	:global(.nickname-list) {
-		margin-top: 0.4rem;
-		list-style-position: inside;
-	}
-
-	:global(.nickname-item) {
-		margin-bottom: 0.2rem;
-	}
-
-	:global(.nickname-item:last-child) {
-		margin-bottom: 0;
-	}
-
-	:global(.btn) {
-		padding: 0.2rem 0.4rem;
-	}
-
-	.header {
-		margin-bottom: 1.5rem;
-	}
-
-	:global(.field) {
-		display: block;
-		margin-bottom: 0.8rem;
-	}
-
-	:global(.field__label) {
-		margin-bottom: 0.25rem;
-		font-weight: 400;
-	}
-
-	:global(.link) {
-		display: block;
-	}
-	:global(.row) {
-		display: flex;
-	}
-
-	:global(.row > *) {
-		margin-right: 0.2rem;
-	}
-
-	:global(.row > *:last-child) {
-		margin-right: 0;
-	} */
 </style>
