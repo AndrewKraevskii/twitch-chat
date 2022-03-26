@@ -1,8 +1,10 @@
 import type { PrivateMessageTags } from 'twitch-js';
 
+export type UserState = PrivateMessageTags & { id: string };
+
 export type ChatMessage = {
-	id: number;
-	user: PrivateMessageTags;
+	id: string;
+	user: UserState;
 	message: string;
 	badgeNames: string[];
 };

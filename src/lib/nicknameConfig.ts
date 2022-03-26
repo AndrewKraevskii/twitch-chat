@@ -15,4 +15,4 @@ export const customNicknames: UserNicknameColor = {
 	}
 };
 
-export const hideNicknames: string[] = ['bruhabruh_bot'];
+export const hideNicknames: string[] = []; //'bruhabruh_bot'

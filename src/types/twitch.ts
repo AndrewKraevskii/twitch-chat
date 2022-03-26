@@ -1,4 +1,4 @@
-import type { PrivateMessageTags } from 'twitch-js';
+import type { UserState } from './chat';
 
 export type TwitchEmote = {
 	id: string;
@@ -22,35 +22,5 @@ export type NewMessageResponse = {
 	username: string;
 	isSelf: boolean;
 	message: string;
-	tags: PrivateMessageTags;
+	tags: UserState;
 };
-
-/*
-const client = new tmi.Client({
-	channels: ["bruhabruh"],
-});
-
-fetchAllBadges();
-fetchAllEmotes();
-
-client.connect().catch(console.error);
-
-client.on("message", (channel, userstate, message, self) => {
-	if (
-		message.startsWith("!") ||
-		hideNicknames.includes(userstate.username) ||
-		userstate["message-type"] !== "chat"
-	)
-		return;
-
-	chat.add(userstate, message);
-});
-
-client.on("messagedeleted", (channel, username, deletedMessage, state) => {
-	chat.remove(state["target-msg-id"]);
-});
-
-client.on("connected", () => {
-	console.log("connected");
-});
-*/

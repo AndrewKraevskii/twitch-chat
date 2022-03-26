@@ -56,6 +56,7 @@
 			isSelf
 		)
 			return;
+
 		let newMessage = message;
 		tags.emotes
 			.sort((a, b) => b.start - a.start)
@@ -70,7 +71,13 @@
 			.split(',')
 			.map((v) => v.split('/')[0]);
 
-		chat.add(tags, newMessage, badgeNames);
+		chat.add({ id: tags.id, user: tags, message: newMessage, badgeNames });
+	};
+
+	const handleRemoveMessage: (state: { targetMessageId: string }) => void = ({
+		targetMessageId
+	}) => {
+		chat.remove(targetMessageId);
 	};
 
 	onMount(async () => {
@@ -89,6 +96,8 @@
 
 		twitchChat.on(Events.PRIVATE_MESSAGE, handleNewMessage);
 
+		twitchChat.on(Events.CLEAR_MESSAGE, handleRemoveMessage);
+
 		twitchChat.on(Events.CONNECTED, () => console.log('Twitch: Connected!'));
 		twitchChat.on(Events.DISCONNECTED, () => console.log('Twitch: Disonnected!'));
 		twitchChat.on(Events.RECONNECT, () => console.log('Twitch: Reconnect!'));
@@ -100,7 +109,7 @@
 
 {#if $chat.length !== 0}
 	<main class="chat-container" transition:fade>
-		{#each $chat.sort((a, b) => b.id - a.id) as msg (msg.id)}
+		{#each $chat.sort((a, b) => new Date(b.id).getTime() - new Date(a.id).getTime()) as msg (msg.id)}
 			<Message chatMessage={msg} />
 		{/each}
 	</main>
