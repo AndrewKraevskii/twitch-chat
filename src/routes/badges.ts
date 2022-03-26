@@ -33,9 +33,10 @@ export const get: RequestHandler = async ({ request }) => {
 		headers
 	}).then((r) => r.json());
 
-	if (!broadcaster[0]) return { status: 500, body: { message: 'Error when get broadcaster id' } };
+	if (!broadcaster.data[0])
+		return { status: 500, body: { message: 'Error when get broadcaster id' } };
 
-	const badges = await fetchAllBadges(headers, broadcaster[0]?.id);
+	const badges = await fetchAllBadges(headers, broadcaster.data[0].id);
 
 	return { body: badges };
 };
