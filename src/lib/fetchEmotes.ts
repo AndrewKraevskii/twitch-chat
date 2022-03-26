@@ -5,16 +5,19 @@ import bttvemotes from './stores/bttvemotes';
 import ffzemotes from './stores/ffzemotes';
 import stvemotes from './stores/stvemotes';
 
-const fetchAllEmotes = async () => {
+const fetchAllEmotes = async (channel: string, broadcasterId: string) => {
 	const stvGlobalEmotes: STVEmote[] = await fetch('https://api.7tv.app/v2/emotes/global', {
 		method: 'GET'
 	})
 		.then((res) => res.json())
 		.catch(console.error);
 
-	const stvChatEmotes: STVEmote[] = await fetch('https://api.7tv.app/v2/users/bruhabruh/emotes', {
-		method: 'GET'
-	})
+	const stvChatEmotes: STVEmote[] = await fetch(
+		'https://api.7tv.app/v2/users/' + channel + '/emotes',
+		{
+			method: 'GET'
+		}
+	)
 		.then((res) => res.json())
 		.catch(console.error);
 
@@ -36,7 +39,7 @@ const fetchAllEmotes = async () => {
 		avatar: string;
 		channelEmotes: BTTVEmote[];
 		sharedEmotes: BTTVEmote[];
-	} = await fetch('https://api.betterttv.net/3/cached/users/twitch/635252103', {
+	} = await fetch('https://api.betterttv.net/3/cached/users/twitch/' + broadcasterId, {
 		method: 'GET'
 	})
 		.then((res) => res.json())
@@ -52,7 +55,7 @@ const fetchAllEmotes = async () => {
 				emoticons: FFZEmote[];
 			};
 		};
-	} = await fetch('https://api.frankerfacez.com/v1/room/id/635252103', {
+	} = await fetch('https://api.frankerfacez.com/v1/room/id/' + broadcasterId, {
 		method: 'GET'
 	})
 		.then((res) => res.json())

@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env';
+	import fetchAllEmotes from '$lib/fetchEmotes';
 	import { hideNicknames } from '$lib/nicknameConfig';
 	import { replaceBetween } from '$lib/replaceBetween';
 	import badges from '$lib/stores/badges';
@@ -24,12 +25,15 @@
 			};
 		}
 
-		const badges: TwitchBadge[] = await fetch('/badges?channel=' + channel).then((r) => r.json());
+		const { badges, broadcasterId }: { badges: TwitchBadge[]; broadcasterId: string } = await fetch(
+			'/badges?channel=' + channel
+		).then((r) => r.json());
 
 		return {
 			props: {
 				channel,
-				tbadges: badges
+				tbadges: badges,
+				broadcasterId
 			}
 		};
 	};
@@ -37,6 +41,7 @@
 
 <script lang="ts">
 	export let channel: string;
+	export let broadcasterId: string;
 	export let tbadges: TwitchBadge[];
 
 	const handleNewMessage: (state: NewMessageResponse) => void = ({
@@ -72,6 +77,8 @@
 		if (!browser) return;
 
 		badges.set(tbadges);
+
+		await fetchAllEmotes(channel, broadcasterId);
 
 		const tjs = (window as any).TwitchJs;
 		const twitchChat = new tjs.Chat({

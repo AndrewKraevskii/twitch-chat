@@ -38,5 +38,10 @@ export const get: RequestHandler = async ({ request }) => {
 
 	const badges = await fetchAllBadges(headers, broadcaster.data[0].id);
 
-	return { body: badges };
+	return {
+		body: {
+			badges,
+			broadcasterId: broadcaster.data[0].id
+		}
+	};
 };
