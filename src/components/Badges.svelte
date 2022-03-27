@@ -1,16 +1,19 @@
 <script lang="ts">
 	import badges from '$lib/stores/badges';
+	import type { ChatTwitchBadge } from '$types/badge';
 
-	export let userBadges: string[];
+	export let userBadges: ChatTwitchBadge[];
 
 	let badgeImages: string[] = [];
 
 	const updateBadgeImages = () => {
 		badgeImages = userBadges
 			.map((badge) => {
-				const versions = $badges?.filter((b) => b.set_id === badge)[0]?.versions;
-				if (!versions) return '';
-				return versions[versions.length - 1]?.image_url_4x ?? '';
+				const versions = $badges?.filter((b) => b.set_id === badge.set_id)[0]?.versions;
+				if (!versions) return new Date().toISOString();
+				const version = versions.filter((v) => v.id === badge.version)[0];
+				if (!version) return new Date().toISOString();
+				return version.image_url_4x ?? new Date().toISOString();
 			})
 			.filter((v) => !!v);
 	};

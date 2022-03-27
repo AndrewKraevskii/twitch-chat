@@ -7,7 +7,7 @@
 	import chat from '$lib/stores/chat';
 	import popup from '$lib/stores/popup';
 	import UrlParser from '$lib/urlParser';
-	import type { TwitchBadge } from '$types/badge';
+	import type { ChatTwitchBadge, TwitchBadge } from '$types/badge';
 	import type { NewMessageResponse } from '$types/twitch';
 	import Message from '@components/Message.svelte';
 	import PopUp from '@components/PopUp.svelte';
@@ -67,12 +67,15 @@
 				newMessage = replaceBetween(newMessage, emote.start, emote.end + 1, `<!${emote.id}!>`);
 			});
 
-		const badgeNames = _raw
+		const badgeNames: ChatTwitchBadge[] = _raw
 			.split(';')
 			.filter((v) => v.includes('badges='))[0]
 			.split('=')[1]
 			.split(',')
-			.map((v) => v.split('/')[0]);
+			.map((v) => ({
+				set_id: v.split('/')[0],
+				version: v.split('/')[1]
+			}));
 
 		chat.add({ id: tags.id, user: tags, message: newMessage, badgeNames });
 	};

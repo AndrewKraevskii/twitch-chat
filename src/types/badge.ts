@@ -9,3 +9,8 @@ export type TwitchBadge = {
 	set_id: string;
 	versions: TwitchBadgeVersion[];
 };
+
+export type ChatTwitchBadge = {
+	set_id: string;
+	version: string;
+};

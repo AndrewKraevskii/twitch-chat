@@ -9,7 +9,7 @@
 	import ffzemotes from '$lib/stores/ffzemotes';
 	import stvemotes from '$lib/stores/stvemotes';
 	import UrlParser from '$lib/urlParser';
-	import type { TwitchBadge } from '$types/badge';
+	import type { ChatTwitchBadge, TwitchBadge } from '$types/badge';
 	import Message from '@components/Message.svelte';
 	import faker from '@faker-js/faker';
 	import { onDestroy } from 'svelte';
@@ -66,14 +66,19 @@
 		config.setAnimationParams(animationParams);
 	};
 
-	const getRandomBadges = (): string[] => {
-		let badgeNames = [];
+	const getRandomBadges = (): ChatTwitchBadge[] => {
+		let badgeNames: ChatTwitchBadge[] = [];
 		for (let i = 0; i < Math.floor(Math.random() * 3); i++) {
 			let hasAlready = true;
 			while (hasAlready) {
 				const randomBadgeId = Math.floor(Math.random() * $badges.length);
-				if (badgeNames.includes($badges[randomBadgeId].set_id)) continue;
-				badgeNames.push($badges[randomBadgeId].set_id);
+				const badge = $badges[randomBadgeId];
+				if (badgeNames.map((v) => v.set_id).includes(badge.set_id)) continue;
+
+				badgeNames.push({
+					set_id: badge.set_id,
+					version: badge.versions[badge.versions.length - 1].id
+				});
 				hasAlready = false;
 			}
 		}

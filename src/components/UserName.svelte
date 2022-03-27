@@ -1,11 +1,12 @@
 <script lang="ts">
 	import config from '$lib/config';
 	import hexToHSL from '$lib/hexToHsl';
+	import type { ChatTwitchBadge } from '$types/badge';
 	import type { ColorGradient } from '$types/nickname';
 	import Badges from './Badges.svelte';
 	import Separator from './Separator.svelte';
 
-	export let userBadges: string[];
+	export let userBadges: ChatTwitchBadge[];
 	export let color: string | null;
 	export let nickname: string;
 

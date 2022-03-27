@@ -1,10 +1,8 @@
 import type { TwitchBadge } from '$types/badge';
 
-const fetchAllBadges = async (
-	headers: Headers,
-	broadcasterId: string
-): Promise<TwitchBadge[]> => {
+type OverwriteMergeFunc<T> = (destinationArray: T, sourceArray: T, option: any) => T;
 
+const fetchAllBadges = async (headers: Headers, broadcasterId: string): Promise<TwitchBadge[]> => {
 	const globalBadges: { data: TwitchBadge[] } = await fetch(
 		'https://api.twitch.tv/helix/chat/badges/global',
 		{
@@ -25,7 +23,7 @@ const fetchAllBadges = async (
 		.then((res) => res.json())
 		.catch(console.error);
 
-	return [...globalBadges.data, ...chatBadges.data];
+	return [...chatBadges.data, ...globalBadges.data];
 };
 
 export default fetchAllBadges;
