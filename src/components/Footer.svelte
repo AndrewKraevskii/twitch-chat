@@ -16,6 +16,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		color: #171717;
 	}
 
 	h6 {
