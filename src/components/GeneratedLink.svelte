@@ -10,12 +10,13 @@
 	export let channel = '';
 	export let hiddenNicknames: string[] = [];
 	export let defaultColor = '';
+	export let font = '';
 	export let customColor: UserNicknameColor = {};
 
 	const updateLink = () => {
 		if (!browser) return;
 
-		const urlEncoder = new UrlEncoder(channel, hiddenNicknames, defaultColor, customColor);
+		const urlEncoder = new UrlEncoder(channel, hiddenNicknames, defaultColor, customColor, font);
 
 		link = urlEncoder.getLink().href;
 	};
@@ -25,6 +26,7 @@
 		hiddenNicknames.length >= 0 &&
 		defaultColor !== undefined &&
 		customColor &&
+		font !== undefined &&
 		updateLink();
 </script>
 

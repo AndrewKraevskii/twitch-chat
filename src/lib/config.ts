@@ -1,16 +1,14 @@
 import type { UserNicknameColor } from '$types/nickname';
+import type { Settings } from '$types/settings';
 import { writable } from 'svelte/store';
 
-export type Config = {
-	hidden: string[];
-	defaultColor: string;
-	customColors: UserNicknameColor;
-};
+export type Config = Omit<Settings, 'channel'>;
 
 const initialState: Config = {
-	hidden: [],
+	hiddenNicknames: [],
 	defaultColor: '#8CF2A5',
-	customColors: {}
+	nicknameColors: {},
+	font: ''
 };
 
 const colorRegex = /^#[a-f0-9]{6}$/i;
@@ -33,8 +31,8 @@ const createConfig = () => {
 				if (!colorRegex.test(color)) return;
 				update((v) => ({
 					...v,
-					customColors: {
-						...v.customColors,
+					nicknameColors: {
+						...v.nicknameColors,
 						[nickname]: color
 					}
 				}));
@@ -42,15 +40,17 @@ const createConfig = () => {
 				if (!colorRegex.test(gradient.start) || !colorRegex.test(gradient.end)) return;
 				update((v) => ({
 					...v,
-					customColors: {
-						...v.customColors,
+					nicknameColors: {
+						...v.nicknameColors,
 						[nickname]: gradient
 					}
 				}));
 			}
 		},
-		setCustomColor: (customColors: UserNicknameColor) => update((v) => ({ ...v, customColors })),
-		setHidden: (hidden: string[]) => update((v) => ({ ...v, hidden })),
+		setCustomColor: (nicknameColors: UserNicknameColor) =>
+			update((v) => ({ ...v, nicknameColors })),
+		setHidden: (hiddenNicknames: string[]) => update((v) => ({ ...v, hiddenNicknames })),
+		setFont: (font: string) => update((v) => ({ ...v, font })),
 		reset: () => set(initialState)
 	};
 };

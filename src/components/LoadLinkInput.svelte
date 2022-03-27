@@ -8,6 +8,7 @@
 	export let hiddenNicknames: string[];
 	export let defaultColor: string;
 	export let customColor: UserNicknameColor;
+	export let font: string;
 
 	let link = '';
 
@@ -19,6 +20,7 @@
 			hiddenNicknames = settings.hiddenNicknames;
 			defaultColor = settings.defaultColor;
 			customColor = settings.nicknameColors;
+			font = settings.font;
 		} catch (e) {
 			link = 'incorrect link';
 		}

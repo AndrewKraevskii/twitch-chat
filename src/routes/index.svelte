@@ -15,6 +15,7 @@
 	let hiddenNicknames: string[] = [];
 	let customColor: UserNicknameColor = {};
 	let defaultColor = '';
+	let font = '';
 </script>
 
 <svelte:head>
@@ -40,12 +41,16 @@
 		<CustomColorInput bind:customColor />
 	</Field>
 
+	<Field label="Font">
+		<input style="width: 100%" bind:value={font} />
+	</Field>
+
 	<Field label="Chat link">
-		<GeneratedLink {channel} {hiddenNicknames} {defaultColor} {customColor} />
+		<GeneratedLink {channel} {hiddenNicknames} {defaultColor} {customColor} {font} />
 	</Field>
 
 	<Field label="Load config from link">
-		<LoadLinkInput bind:channel bind:hiddenNicknames bind:customColor bind:defaultColor />
+		<LoadLinkInput bind:channel bind:hiddenNicknames bind:customColor bind:defaultColor bind:font />
 	</Field>
 
 	<Footer />

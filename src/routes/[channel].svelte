@@ -55,7 +55,7 @@
 	}) => {
 		if (
 			message.startsWith('!') ||
-			$config.hidden.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
+			$config.hiddenNicknames.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
 			isSelf
 		)
 			return;
@@ -84,13 +84,14 @@
 	};
 
 	const loadConfigFromHref = () => {
-		const { hiddenNicknames, defaultColor, nicknameColors } = new UrlParser(
+		const { hiddenNicknames, defaultColor, nicknameColors, font } = new UrlParser(
 			window.location.href
 		).getSettings();
 
 		config.setHidden(hiddenNicknames);
 		config.setDefaultColor(defaultColor);
 		config.setCustomColor(nicknameColors);
+		config.setFont(font);
 	};
 
 	onMount(async () => {

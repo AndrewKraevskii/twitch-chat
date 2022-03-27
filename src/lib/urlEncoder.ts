@@ -4,19 +4,22 @@ import { SettingName } from '$types/settings';
 class UrlEncoder {
 	private channel: string;
 	private hiddenNicknames: string[];
-	private defaultColor: string | undefined;
+	private defaultColor: string;
+	private font: string;
 	private customColor: UserNicknameColor;
 
 	constructor(
 		channel: string,
 		hiddenNicknames: string[],
 		defaultColor: string | undefined,
-		customColor: UserNicknameColor
+		customColor: UserNicknameColor,
+		font: string
 	) {
 		this.channel = channel;
 		this.hiddenNicknames = hiddenNicknames;
 		this.defaultColor = defaultColor;
 		this.customColor = customColor;
+		this.font = font;
 	}
 
 	private setChannelToUrl(url: URL): URL {
@@ -55,6 +58,13 @@ class UrlEncoder {
 		return url;
 	}
 
+	private setFontToUrl(url: URL): URL {
+		if (this.font) {
+			url.searchParams.append(SettingName.Font, this.font);
+		}
+		return url;
+	}
+
 	public getLink(): URL {
 		let url = new URL(window.location.origin);
 
@@ -62,6 +72,7 @@ class UrlEncoder {
 		url = this.setHiddenNicknamesToUrl(url);
 		url = this.setDefaultColorToUrl(url);
 		url = this.setCustomNicknameColorsToUrl(url);
+		url = this.setFontToUrl(url);
 
 		return url;
 	}

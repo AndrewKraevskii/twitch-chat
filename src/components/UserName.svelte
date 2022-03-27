@@ -17,7 +17,7 @@
 	const step = 5;
 
 	const updateNicknameColors = () => {
-		const customNicknames = $config.customColors;
+		const customNicknames = $config.nicknameColors;
 		if (Object.keys(customNicknames).includes(nickname)) {
 			if (typeof customNicknames !== 'string') {
 				const colors = customNicknames[nickname] as ColorGradient;

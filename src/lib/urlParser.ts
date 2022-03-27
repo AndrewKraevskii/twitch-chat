@@ -58,12 +58,19 @@ class UrlParser {
 		return colors;
 	}
 
+	public getFont(): string {
+		const font = this.url.searchParams.get(SettingName.Font);
+		if (!font) return '';
+		return font;
+	}
+
 	public getSettings(): Settings {
 		return {
 			channel: this.getChannel(),
 			hiddenNicknames: this.getHiddenNicknames(),
 			defaultColor: this.getDefaultColor(),
-			nicknameColors: this.getNicknameColors()
+			nicknameColors: this.getNicknameColors(),
+			font: this.getFont()
 		};
 	}
 }

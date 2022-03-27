@@ -3,7 +3,8 @@ import type { UserNicknameColor } from './nickname';
 export enum SettingName {
 	HiddenNicknames = 'hidden',
 	DefaultColor = 'defaultColor',
-	CustomNicknameColors = 'custom'
+	CustomNicknameColors = 'custom',
+	Font = 'font'
 }
 
 export type Settings = {
@@ -11,4 +12,5 @@ export type Settings = {
 	hiddenNicknames: string[];
 	defaultColor: string;
 	nicknameColors: UserNicknameColor;
+	font: string;
 };
