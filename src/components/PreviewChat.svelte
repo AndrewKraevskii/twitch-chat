@@ -12,7 +12,7 @@
 	import type { TwitchBadge } from '$types/badge';
 	import Message from '@components/Message.svelte';
 	import faker from '@faker-js/faker';
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import type { EmoteTag } from 'twitch-js';
 </script>
@@ -34,6 +34,17 @@
 			console.error(e);
 		}
 	};
+
+	const handleUpdateChannel = async () => {
+		if (!browser || !channel) return;
+		await loadBadges();
+
+		loadConfigFromHref();
+
+		timeout = setTimeout(sendNewMessage, Math.floor(Math.random() * 2000 + 1000));
+	};
+
+	$: !!channel && handleUpdateChannel();
 
 	const loadConfigFromHref = () => {
 		const {
@@ -182,15 +193,6 @@
 		});
 		timeout = setTimeout(sendNewMessage, Math.floor(Math.random() * 2000 + 1000));
 	};
-
-	onMount(async () => {
-		if (!browser) return;
-		await loadBadges();
-
-		loadConfigFromHref();
-
-		timeout = setTimeout(sendNewMessage, Math.floor(Math.random() * 2000 + 1000));
-	});
 
 	onDestroy(() => {
 		clearTimeout(timeout);

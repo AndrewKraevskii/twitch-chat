@@ -23,6 +23,19 @@
 	let animation: Animation = Animation.Slide;
 	let animationEasing: AnimationEasing = AnimationEasing.Linear;
 	let animationParams: AnimationParams = {};
+
+	let debouncedChannel = '';
+
+	let timeout: NodeJS.Timeout;
+
+	const debounce = () => {
+		clearTimeout(timeout);
+		setTimeout(() => {
+			debouncedChannel = channel;
+		}, 1000);
+	};
+
+	$: channel !== undefined && debounce();
 </script>
 
 <svelte:head>
@@ -96,7 +109,7 @@
 				/>
 			</Field>
 		</div>
-		<PreviewChat {channel} />
+		<PreviewChat channel={debouncedChannel} />
 	</div>
 
 	<Footer />
