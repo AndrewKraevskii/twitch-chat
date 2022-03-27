@@ -20,14 +20,14 @@
 	const updateNicknameColors = () => {
 		const customNicknames = $config.nicknameColors;
 		if (Object.keys(customNicknames).includes(nickname)) {
-			if (typeof customNicknames !== 'string') {
+			if (typeof customNicknames[nickname] !== 'string') {
 				const colors = customNicknames[nickname] as ColorGradient;
 				nicknameStartColor = colors.start;
 				nicknameEndColor = colors.end;
-			} else {
-				nicknameStartColor = customNicknames[nickname] as string;
-				nicknameEndColor = customNicknames[nickname] as string;
+				return;
 			}
+			nicknameStartColor = customNicknames[nickname] as string;
+			nicknameEndColor = customNicknames[nickname] as string;
 			return;
 		}
 

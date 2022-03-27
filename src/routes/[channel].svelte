@@ -159,7 +159,6 @@
 		display: flex;
 		flex-direction: column-reverse;
 		align-items: stretch;
-		color: #fafafa;
 	}
 
 	:global(.chat-container > *) {

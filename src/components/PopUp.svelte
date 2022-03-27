@@ -35,7 +35,6 @@
 
 	.popup {
 		background-color: rgb(17, 17, 17);
-		color: #fafafa;
 		padding: 0.75rem 1rem;
 		border-radius: 0.5rem;
 	}

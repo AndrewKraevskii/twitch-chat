@@ -123,6 +123,7 @@
 
 	.heading {
 		margin-bottom: 1rem;
+		color: #171717;
 	}
 	.columns {
 		display: grid;
@@ -131,5 +132,6 @@
 	}
 	.controls {
 		grid-column: 1 / 2;
+		color: #171717;
 	}
 </style>
