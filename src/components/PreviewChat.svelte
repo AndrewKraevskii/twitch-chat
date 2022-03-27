@@ -174,6 +174,7 @@
 
 	const sendNewMessage = () => {
 		const nickname = getNickname();
+		if ($config.hiddenNicknames.includes(nickname)) return;
 		const { message, emotes } = getMessage();
 		let newMessage = message;
 		emotes
