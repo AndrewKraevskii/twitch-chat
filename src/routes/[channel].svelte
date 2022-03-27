@@ -1,14 +1,16 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env';
+	import config from '$lib/config';
 	import fetchAllEmotes from '$lib/fetchEmotes';
-	import nicknameConfig from '$lib/nicknameConfig';
 	import { replaceBetween } from '$lib/replaceBetween';
 	import badges from '$lib/stores/badges';
 	import chat from '$lib/stores/chat';
+	import popup from '$lib/stores/popup';
 	import UrlParser from '$lib/urlParser';
 	import type { TwitchBadge } from '$types/badge';
 	import type { NewMessageResponse } from '$types/twitch';
 	import Message from '@components/Message.svelte';
+	import PopUp from '@components/PopUp.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -53,7 +55,7 @@
 	}) => {
 		if (
 			message.startsWith('!') ||
-			$nicknameConfig.hidden.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
+			$config.hidden.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
 			isSelf
 		)
 			return;
@@ -81,20 +83,20 @@
 		chat.remove(targetMessageId);
 	};
 
-	const loadNicknameConfigFromHref = () => {
+	const loadConfigFromHref = () => {
 		const { hiddenNicknames, defaultColor, nicknameColors } = new UrlParser(
 			window.location.href
 		).getSettings();
 
-		nicknameConfig.setHidden(hiddenNicknames);
-		nicknameConfig.setDefaultColor(defaultColor);
-		nicknameConfig.setCustomColor(nicknameColors);
+		config.setHidden(hiddenNicknames);
+		config.setDefaultColor(defaultColor);
+		config.setCustomColor(nicknameColors);
 	};
 
 	onMount(async () => {
 		if (!browser) return;
 
-		loadNicknameConfigFromHref();
+		loadConfigFromHref();
 
 		badges.set(tbadges);
 
@@ -111,15 +113,20 @@
 
 		twitchChat.on(Events.CLEAR_MESSAGE, handleRemoveMessage);
 
-		twitchChat.on(Events.CONNECTED, () => console.log('Twitch: Connected!'));
-		twitchChat.on(Events.DISCONNECTED, () => console.log('Twitch: Disonnected!'));
-		twitchChat.on(Events.RECONNECT, () => console.log('Twitch: Reconnect!'));
+		twitchChat.on(Events.CONNECTED, () => popup.set('Twitch: Connected!'));
+		twitchChat.on(Events.DISCONNECTED, () => popup.set('Twitch: Disonnected!'));
+		twitchChat.on(Events.RECONNECT, () => popup.set('Twitch: Reconnect!'));
 
-		await twitchChat.connect();
-		await twitchChat.join(channel);
+		try {
+			await twitchChat.connect();
+			await twitchChat.join(channel);
+		} catch (e) {
+			popup.set('Twitch: Error, try reload!');
+		}
 	});
 </script>
 
+<PopUp />
 {#if $chat.length !== 0}
 	<main class="chat-container" transition:fade>
 		{#each $chat.sort((a, b) => b.time - a.time) as msg (msg.id)}

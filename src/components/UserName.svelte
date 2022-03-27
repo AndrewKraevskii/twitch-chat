@@ -1,6 +1,6 @@
 <script lang="ts">
+	import config from '$lib/config';
 	import hexToHSL from '$lib/hexToHsl';
-	import nicknameConfig from '$lib/nicknameConfig';
 	import type { ColorGradient } from '$types/nickname';
 	import Badges from './Badges.svelte';
 	import Separator from './Separator.svelte';
@@ -17,7 +17,7 @@
 	const step = 5;
 
 	const updateNicknameColors = () => {
-		const customNicknames = $nicknameConfig.customColors;
+		const customNicknames = $config.customColors;
 		if (Object.keys(customNicknames).includes(nickname)) {
 			if (typeof customNicknames !== 'string') {
 				const colors = customNicknames[nickname] as ColorGradient;
@@ -48,10 +48,8 @@
 <div class="username">
 	<Badges {userBadges} /><span
 		class="name"
-		style={`background: linear-gradient(to right, ${
-			nicknameStartColor ?? $nicknameConfig.defaultColor
-		}, ${
-			nicknameEndColor ?? $nicknameConfig.defaultColor
+		style={`background: linear-gradient(to right, ${nicknameStartColor ?? $config.defaultColor}, ${
+			nicknameEndColor ?? $config.defaultColor
 		}); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent`}
 		>{nickname}</span
 	><Separator />

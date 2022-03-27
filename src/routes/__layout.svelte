@@ -7,4 +7,8 @@
 <script lang="ts">
 </script>
 
-<slot />
+<div
+	style={`font-family: 'JetBrains Mono', 'Golos UI VF', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;`}
+>
+	<slot />
+</div>

@@ -1,13 +1,13 @@
 import type { UserNicknameColor } from '$types/nickname';
 import { writable } from 'svelte/store';
 
-export type NicknameConfig = {
+export type Config = {
 	hidden: string[];
 	defaultColor: string;
 	customColors: UserNicknameColor;
 };
 
-const initialState: NicknameConfig = {
+const initialState: Config = {
 	hidden: [],
 	defaultColor: '#8CF2A5',
 	customColors: {}
@@ -15,7 +15,7 @@ const initialState: NicknameConfig = {
 
 const colorRegex = /^#[a-f0-9]{6}$/i;
 
-const createNicknameConfig = () => {
+const createConfig = () => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -55,6 +55,6 @@ const createNicknameConfig = () => {
 	};
 };
 
-const nicknameConfig = createNicknameConfig();
+const config = createConfig();
 
-export default nicknameConfig;
+export default config;
