@@ -25,7 +25,7 @@
 				wordsOrEmotes.push({ service: 'twitch', value: v });
 				return;
 			}
-			if (!!$stvemotes.filter((e) => e.name === v)[0]) {
+			if ($stvemotes.find((e) => e.name === v)) {
 				if (text !== '') {
 					wordsOrEmotes.push({ value: text.trim() });
 					text = '';
@@ -33,7 +33,7 @@
 				wordsOrEmotes.push({ service: 'stv', value: v });
 				return;
 			}
-			if (!!$bttvemotes.emotes.filter((e) => e.code === v)[0]) {
+			if ($bttvemotes.emotes.find((e) => e.code === v)) {
 				if (text !== '') {
 					wordsOrEmotes.push({ value: text.trim() });
 					text = '';
@@ -41,7 +41,7 @@
 				wordsOrEmotes.push({ service: 'bttv', value: v });
 				return;
 			}
-			if (!!$ffzemotes.filter((e) => e.name === v)[0]) {
+			if ($ffzemotes.find((e) => e.name === v)) {
 				if (text !== '') {
 					wordsOrEmotes.push({ value: text.trim() });
 					text = '';

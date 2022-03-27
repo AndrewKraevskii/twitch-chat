@@ -15,7 +15,7 @@
 				if (!version) return new Date().toISOString();
 				return version.image_url_4x ?? new Date().toISOString();
 			})
-			.filter((v) => !!v);
+			.filter((v) => v);
 	};
 
 	$: userBadges && updateBadgeImages();
