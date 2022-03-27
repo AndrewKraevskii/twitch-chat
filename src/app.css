@@ -42,7 +42,7 @@ input[type='checkbox'] {
 }
 
 input:focus,
-select {
+select:focus {
 	border-color: #8cf2a5;
 	outline: none;
 }
