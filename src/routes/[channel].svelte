@@ -154,6 +154,9 @@
 	}
 
 	:global(body) {
+		display: flex !important;
+		flex-direction: column-reverse !important;
+		height: 100vh !important;
 		padding: 1.5rem !important;
 	}
 </style>
