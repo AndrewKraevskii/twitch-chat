@@ -174,29 +174,30 @@
 
 	const sendNewMessage = () => {
 		const nickname = getNickname();
-		if ($config.hiddenNicknames.includes(nickname)) return;
-		const { message, emotes } = getMessage();
-		let newMessage = message;
-		emotes
-			.sort((a, b) => b.start - a.start)
-			.forEach((emote) => {
-				newMessage = replaceBetween(newMessage, emote.start, emote.end + 1, `<!${emote.id}!>`);
+		if (!$config.hiddenNicknames.includes(nickname)) {
+			const { message, emotes } = getMessage();
+			let newMessage = message;
+			emotes
+				.sort((a, b) => b.start - a.start)
+				.forEach((emote) => {
+					newMessage = replaceBetween(newMessage, emote.start, emote.end + 1, `<!${emote.id}!>`);
+				});
+			chat.add({
+				id: (Math.random() * 1000000).toString(),
+				user: {
+					id: 'id',
+					badges: {},
+					color: getRandomColor(),
+					displayName: nickname,
+					emotes: emotes,
+					emoteSets: [],
+					username: nickname.toLowerCase(),
+					isModerator: false
+				},
+				message: newMessage,
+				badgeNames: getRandomBadges()
 			});
-		chat.add({
-			id: (Math.random() * 1000000).toString(),
-			user: {
-				id: 'id',
-				badges: {},
-				color: getRandomColor(),
-				displayName: nickname,
-				emotes: emotes,
-				emoteSets: [],
-				username: nickname.toLowerCase(),
-				isModerator: false
-			},
-			message: newMessage,
-			badgeNames: getRandomBadges()
-		});
+		}
 		timeout = setTimeout(sendNewMessage, Math.floor(Math.random() * 2000 + 1000));
 	};
 
