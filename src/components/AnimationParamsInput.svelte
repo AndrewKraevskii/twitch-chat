@@ -6,14 +6,12 @@
 
 	export let animation: Animation;
 
-	export let delay: number = undefined;
 	export let duration: number = undefined;
 	export let start: number = undefined;
 	export let opacity: number = undefined;
 </script>
 
 <div class="animation-params-wrapper">
-	<input placeholder="delay in ms" bind:value={delay} min={0} type="number" />
 	<input placeholder="duration in ms" bind:value={duration} min={0} type="number" />
 	{#if animation === Animation.Scale}
 		<input placeholder="start" bind:value={start} min={0} type="number" />

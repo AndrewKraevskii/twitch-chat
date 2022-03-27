@@ -75,7 +75,6 @@
 				<Field label="Animation Parameters">
 					<AnimationParamsInput
 						{animation}
-						bind:delay={animationParams.delay}
 						bind:duration={animationParams.duration}
 						bind:opacity={animationParams.opacity}
 						bind:start={animationParams.start}
