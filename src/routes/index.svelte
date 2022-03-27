@@ -11,6 +11,7 @@
 	import GeneratedLink from '@components/GeneratedLink.svelte';
 	import HiddenNicknamesInput from '@components/HiddenNicknamesInput.svelte';
 	import LoadLinkInput from '@components/LoadLinkInput.svelte';
+	import PreviewChat from '@components/PreviewChat.svelte';
 </script>
 
 <script lang="ts">
@@ -31,67 +32,72 @@
 <main class="container">
 	<h1 class="heading">Chat link generator</h1>
 
-	<Field label="Channel">
-		<ChannelInput bind:channel />
-	</Field>
+	<div class="columns">
+		<div class="controls">
+			<Field label="Channel">
+				<ChannelInput bind:channel />
+			</Field>
 
-	<Field label="Default color">
-		<DefaultColorInput bind:defaultColor />
-	</Field>
+			<Field label="Default color">
+				<DefaultColorInput bind:defaultColor />
+			</Field>
 
-	<Field label="Hidden nicknames">
-		<HiddenNicknamesInput bind:hiddenNicknames />
-	</Field>
+			<Field label="Hidden nicknames">
+				<HiddenNicknamesInput bind:hiddenNicknames />
+			</Field>
 
-	<Field label="Custom color nicknames">
-		<CustomColorInput bind:customColor />
-	</Field>
+			<Field label="Custom color nicknames">
+				<CustomColorInput bind:customColor />
+			</Field>
 
-	<Field label="Font">
-		<input style="width: 100%" bind:value={font} />
-	</Field>
+			<Field label="Font">
+				<input style="width: 100%" bind:value={font} />
+			</Field>
 
-	<Field label="Animation">
-		<AnimationSelect bind:animation bind:animationEasing />
-	</Field>
+			<Field label="Animation">
+				<AnimationSelect bind:animation bind:animationEasing />
+			</Field>
 
-	{#if animation !== Animation.Nothing}
-		<Field label="Animation Parameters">
-			<AnimationParamsInput
-				{animation}
-				bind:delay={animationParams.delay}
-				bind:duration={animationParams.duration}
-				bind:opacity={animationParams.opacity}
-				bind:start={animationParams.start}
-			/>
-		</Field>
-	{/if}
+			{#if animation !== Animation.Nothing}
+				<Field label="Animation Parameters">
+					<AnimationParamsInput
+						{animation}
+						bind:delay={animationParams.delay}
+						bind:duration={animationParams.duration}
+						bind:opacity={animationParams.opacity}
+						bind:start={animationParams.start}
+					/>
+				</Field>
+			{/if}
 
-	<Field label="Chat link">
-		<GeneratedLink
-			{channel}
-			{hiddenNicknames}
-			{defaultColor}
-			{customColor}
-			{font}
-			{animation}
-			{animationEasing}
-			{animationParams}
-		/>
-	</Field>
+			<Field label="Chat link">
+				<GeneratedLink
+					{channel}
+					{hiddenNicknames}
+					{defaultColor}
+					{customColor}
+					{font}
+					{animation}
+					{animationEasing}
+					{animationParams}
+				/>
+			</Field>
 
-	<Field label="Load config from link">
-		<LoadLinkInput
-			bind:channel
-			bind:hiddenNicknames
-			bind:customColor
-			bind:defaultColor
-			bind:font
-			bind:animation
-			bind:animationEasing
-			bind:animationParams
-		/>
-	</Field>
+			<Field label="Load config from link">
+				<LoadLinkInput
+					bind:channel
+					bind:hiddenNicknames
+					bind:customColor
+					bind:defaultColor
+					bind:font
+					bind:animation
+					bind:animationEasing
+					bind:animationParams
+				/>
+			</Field>
+		</div>
+		<PreviewChat {channel} />
+	</div>
 
 	<Footer />
 </main>
@@ -105,5 +111,13 @@
 
 	.heading {
 		margin-bottom: 1rem;
+	}
+	.columns {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		grid-gap: 4rem;
+	}
+	.controls {
+		grid-column: 1 / 2;
 	}
 </style>

@@ -1,6 +1,8 @@
 <script lang="ts" context="module">
 	import { browser } from '$app/env';
+	import config from '$lib/config';
 	import UrlEncoder from '$lib/urlEncoder';
+	import UrlParser from '$lib/urlParser';
 	import type { Animation, AnimationEasing, AnimationParams } from '$types/animation';
 	import type { UserNicknameColor } from '$types/nickname';
 </script>
@@ -32,6 +34,25 @@
 		});
 
 		link = urlEncoder.getLink().href;
+
+		const {
+			hiddenNicknames: hn,
+			defaultColor: dc,
+			nicknameColors: nc,
+			font: f,
+			animation: a,
+			animationEasing: ae,
+			animationParams: ap
+		} = new UrlParser(link).getSettings();
+
+		config.reset();
+		config.setHidden(hn);
+		config.setDefaultColor(dc);
+		config.setCustomColor(nc);
+		config.setFont(f);
+		config.setAnimation(a);
+		config.setAnimationEasing(ae);
+		config.setAnimationParams(ap);
 	};
 
 	$: browser &&
