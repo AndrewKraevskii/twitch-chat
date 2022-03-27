@@ -5,7 +5,7 @@
 </script>
 
 <footer>
-	<h6>Made with love by <a href="https://t.me/bruhabruh4">BruhaBruh</a></h6>
+	<h6>Made with ❤ by <a href="https://t.me/bruhabruh4">BruhaBruh</a></h6>
 	<a href="https://github.com/BruhaBruh/twitch-chat">GitHub</a>
 </footer>
 

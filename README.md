@@ -6,3 +6,5 @@ My implementation of twitch chat widget with 7tv, bttv, and ffz support
 
 - `VITE_TWITCH_CLIENT_ID` - Twitch App client id
 - `VITE_TWITCH_SECRET_KEY` - Twitch App secret key
+
+TODO: Возможно добавить Бегущую строку и Сообщения отдельно с ником сверху

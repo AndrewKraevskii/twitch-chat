@@ -1,39 +1,7 @@
 import { Animation, AnimationEasing, type AnimationParams } from '$types/animation';
 import type { UserNicknameColor } from '$types/nickname';
 import type { Settings } from '$types/settings';
-import {
-	backIn,
-	backInOut,
-	backOut,
-	bounceIn,
-	bounceInOut,
-	bounceOut,
-	circIn,
-	circInOut,
-	circOut,
-	cubicIn,
-	cubicInOut,
-	cubicOut,
-	elasticIn,
-	elasticInOut,
-	elasticOut,
-	expoIn,
-	expoInOut,
-	expoOut,
-	linear,
-	quadIn,
-	quadInOut,
-	quadOut,
-	quartIn,
-	quartInOut,
-	quartOut,
-	quintIn,
-	quintInOut,
-	quintOut,
-	sineIn,
-	sineInOut,
-	sineOut
-} from 'svelte/easing';
+import * as easing from 'svelte/easing';
 import { writable } from 'svelte/store';
 import type { EasingFunction } from 'svelte/types/runtime/transition';
 
@@ -56,70 +24,7 @@ export const isColor = (color: string) => {
 };
 
 export const getEasing = (animationEasing: AnimationEasing): EasingFunction => {
-	switch (animationEasing) {
-		case AnimationEasing.BackInOut:
-			return backInOut;
-		case AnimationEasing.BackIn:
-			return backIn;
-		case AnimationEasing.BackOut:
-			return backOut;
-		case AnimationEasing.BounceInOut:
-			return bounceInOut;
-		case AnimationEasing.BounceIn:
-			return bounceIn;
-		case AnimationEasing.BounceOut:
-			return bounceOut;
-		case AnimationEasing.CircInOut:
-			return circInOut;
-		case AnimationEasing.CircIn:
-			return circIn;
-		case AnimationEasing.CircOut:
-			return circOut;
-		case AnimationEasing.CubicInOut:
-			return cubicInOut;
-		case AnimationEasing.CubicIn:
-			return cubicIn;
-		case AnimationEasing.CubicOut:
-			return cubicOut;
-		case AnimationEasing.ElasticInOut:
-			return elasticInOut;
-		case AnimationEasing.ElasticIn:
-			return elasticIn;
-		case AnimationEasing.ElasticOut:
-			return elasticOut;
-		case AnimationEasing.ExpoInOut:
-			return expoInOut;
-		case AnimationEasing.ExpoIn:
-			return expoIn;
-		case AnimationEasing.ExpoOut:
-			return expoOut;
-		case AnimationEasing.QuadInOut:
-			return quadInOut;
-		case AnimationEasing.QuadIn:
-			return quadIn;
-		case AnimationEasing.QuadOut:
-			return quadOut;
-		case AnimationEasing.QuartInOut:
-			return quartInOut;
-		case AnimationEasing.QuartIn:
-			return quartIn;
-		case AnimationEasing.QuartOut:
-			return quartOut;
-		case AnimationEasing.QuintInOut:
-			return quintInOut;
-		case AnimationEasing.QuintIn:
-			return quintIn;
-		case AnimationEasing.QuintOut:
-			return quintOut;
-		case AnimationEasing.SineInOut:
-			return sineInOut;
-		case AnimationEasing.SineIn:
-			return sineIn;
-		case AnimationEasing.SineOut:
-			return sineOut;
-		default:
-			return linear;
-	}
+	return easing[animationEasing];
 };
 
 const createConfig = () => {
