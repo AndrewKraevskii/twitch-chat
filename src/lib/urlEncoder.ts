@@ -1,51 +1,44 @@
-import type { UserNicknameColor } from '$types/nickname';
-import { SettingName } from '$types/settings';
+import { SettingName, type Settings } from '$types/settings';
 
 class UrlEncoder {
-	private channel: string;
-	private hiddenNicknames: string[];
-	private defaultColor: string;
-	private font: string;
-	private customColor: UserNicknameColor;
+	private url: URL;
+	private settings: Settings;
 
-	constructor(
-		channel: string,
-		hiddenNicknames: string[],
-		defaultColor: string | undefined,
-		customColor: UserNicknameColor,
-		font: string
-	) {
-		this.channel = channel;
-		this.hiddenNicknames = hiddenNicknames;
-		this.defaultColor = defaultColor;
-		this.customColor = customColor;
-		this.font = font;
+	constructor(settings: Settings) {
+		this.url = new URL(window.location.origin);
+		this.settings = settings;
 	}
 
-	private setChannelToUrl(url: URL): URL {
-		url.pathname = '/' + this.channel;
-		return url;
+	private setChannel(): this {
+		this.url.pathname = '/' + this.settings.channel;
+		return this;
 	}
 
-	private setHiddenNicknamesToUrl(url: URL): URL {
-		if (this.hiddenNicknames.length !== 0) {
-			url.searchParams.append(SettingName.HiddenNicknames, this.hiddenNicknames.join(','));
+	private setHiddenNicknames(): this {
+		if (this.settings.hiddenNicknames.length !== 0) {
+			this.url.searchParams.append(
+				SettingName.HiddenNicknames,
+				this.settings.hiddenNicknames.join(',')
+			);
 		}
-		return url;
+		return this;
 	}
 
-	private setDefaultColorToUrl(url: URL): URL {
-		if (this.defaultColor) {
-			url.searchParams.append(SettingName.DefaultColor, this.defaultColor.replace('#', ''));
+	private setDefaultColor(): this {
+		if (this.settings.defaultColor) {
+			this.url.searchParams.append(
+				SettingName.DefaultColor,
+				this.settings.defaultColor.replace('#', '')
+			);
 		}
-		return url;
+		return this;
 	}
 
-	private setCustomNicknameColorsToUrl(url: URL): URL {
-		if (Object.keys(this.customColor).length !== 0) {
+	private setCustomNicknameColors(): this {
+		if (Object.keys(this.settings.nicknameColors).length !== 0) {
 			let v = [];
-			Object.keys(this.customColor).forEach((nickname) => {
-				const color = this.customColor[nickname];
+			Object.keys(this.settings.nicknameColors).forEach((nickname) => {
+				const color = this.settings.nicknameColors[nickname];
 				if (typeof color === 'string') {
 					v.push(`${nickname}:${color.replace('#', '')}`);
 				} else {
@@ -53,28 +46,54 @@ class UrlEncoder {
 				}
 			});
 
-			url.searchParams.append(SettingName.CustomNicknameColors, v.join(','));
+			this.url.searchParams.append(SettingName.CustomNicknameColors, v.join(','));
 		}
-		return url;
+		return this;
 	}
 
-	private setFontToUrl(url: URL): URL {
-		if (this.font) {
-			url.searchParams.append(SettingName.Font, this.font);
+	private setFont(): this {
+		if (this.settings.font) {
+			this.url.searchParams.append(SettingName.Font, this.settings.font);
 		}
-		return url;
+		return this;
+	}
+
+	private setAnimation(): this {
+		if (this.settings.animation) {
+			this.url.searchParams.append(SettingName.Animation, this.settings.animation);
+		}
+		return this;
+	}
+
+	private setAnimationEasing(): this {
+		if (this.settings.animationEasing) {
+			this.url.searchParams.append(SettingName.AnimationEasing, this.settings.animationEasing);
+		}
+		return this;
+	}
+
+	private setAnimationParams(): this {
+		if (Object.keys(this.settings.animationParams).length !== 0) {
+			let v = [];
+			Object.keys(this.settings.animationParams).forEach((key) => {
+				if (!this.settings.animationParams[key]) return;
+				v.push(key + ':' + this.settings.animationParams[key]);
+			});
+
+			if (v.length !== 0) this.url.searchParams.append(SettingName.AnimationParams, v.join(','));
+		}
+		return this;
 	}
 
 	public getLink(): URL {
-		let url = new URL(window.location.origin);
-
-		url = this.setChannelToUrl(url);
-		url = this.setHiddenNicknamesToUrl(url);
-		url = this.setDefaultColorToUrl(url);
-		url = this.setCustomNicknameColorsToUrl(url);
-		url = this.setFontToUrl(url);
-
-		return url;
+		return this.setChannel()
+			.setHiddenNicknames()
+			.setDefaultColor()
+			.setCustomNicknameColors()
+			.setFont()
+			.setAnimation()
+			.setAnimationEasing()
+			.setAnimationParams().url;
 	}
 }
 

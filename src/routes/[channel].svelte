@@ -84,14 +84,23 @@
 	};
 
 	const loadConfigFromHref = () => {
-		const { hiddenNicknames, defaultColor, nicknameColors, font } = new UrlParser(
-			window.location.href
-		).getSettings();
+		const {
+			hiddenNicknames,
+			defaultColor,
+			nicknameColors,
+			font,
+			animation,
+			animationEasing,
+			animationParams
+		} = new UrlParser(window.location.href).getSettings();
 
 		config.setHidden(hiddenNicknames);
 		config.setDefaultColor(defaultColor);
 		config.setCustomColor(nicknameColors);
 		config.setFont(font);
+		config.setAnimation(animation);
+		config.setAnimationEasing(animationEasing);
+		config.setAnimationParams(animationParams);
 	};
 
 	onMount(async () => {

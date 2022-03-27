@@ -1,5 +1,8 @@
 <script lang="ts" context="module">
+	import { Animation, AnimationEasing, type AnimationParams } from '$types/animation';
 	import type { UserNicknameColor } from '$types/nickname';
+	import AnimationParamsInput from '@components/AnimationParamsInput.svelte';
+	import AnimationSelect from '@components/AnimationSelect.svelte';
 	import ChannelInput from '@components/ChannelInput.svelte';
 	import CustomColorInput from '@components/CustomColorInput.svelte';
 	import DefaultColorInput from '@components/DefaultColorInput.svelte';
@@ -16,6 +19,9 @@
 	let customColor: UserNicknameColor = {};
 	let defaultColor = '';
 	let font = '';
+	let animation: Animation = Animation.Slide;
+	let animationEasing: AnimationEasing = AnimationEasing.Linear;
+	let animationParams: AnimationParams = {};
 </script>
 
 <svelte:head>
@@ -45,12 +51,46 @@
 		<input style="width: 100%" bind:value={font} />
 	</Field>
 
+	<Field label="Animation">
+		<AnimationSelect bind:animation bind:animationEasing />
+	</Field>
+
+	{#if animation !== Animation.Nothing}
+		<Field label="Animation Parameters">
+			<AnimationParamsInput
+				{animation}
+				bind:delay={animationParams.delay}
+				bind:duration={animationParams.duration}
+				bind:opacity={animationParams.opacity}
+				bind:start={animationParams.start}
+			/>
+		</Field>
+	{/if}
+
 	<Field label="Chat link">
-		<GeneratedLink {channel} {hiddenNicknames} {defaultColor} {customColor} {font} />
+		<GeneratedLink
+			{channel}
+			{hiddenNicknames}
+			{defaultColor}
+			{customColor}
+			{font}
+			{animation}
+			{animationEasing}
+			{animationParams}
+		/>
 	</Field>
 
 	<Field label="Load config from link">
-		<LoadLinkInput bind:channel bind:hiddenNicknames bind:customColor bind:defaultColor bind:font />
+		<LoadLinkInput
+			bind:channel
+			bind:hiddenNicknames
+			bind:customColor
+			bind:defaultColor
+			bind:font
+			bind:animation
+			bind:animationEasing
+			bind:animationParams
+		/>
 	</Field>
 
 	<Footer />

@@ -1,10 +1,14 @@
+import type { Animation, AnimationEasing, AnimationParams } from './animation';
 import type { UserNicknameColor } from './nickname';
 
 export enum SettingName {
 	HiddenNicknames = 'hidden',
 	DefaultColor = 'defaultColor',
 	CustomNicknameColors = 'custom',
-	Font = 'font'
+	Font = 'font',
+	Animation = 'animation',
+	AnimationEasing = 'animationEasing',
+	AnimationParams = 'animationParams'
 }
 
 export type Settings = {
@@ -13,4 +17,7 @@ export type Settings = {
 	defaultColor: string;
 	nicknameColors: UserNicknameColor;
 	font: string;
+	animation: Animation;
+	animationEasing: AnimationEasing;
+	animationParams: AnimationParams;
 };

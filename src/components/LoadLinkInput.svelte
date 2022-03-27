@@ -1,5 +1,6 @@
 <script lang="ts" context="module">
 	import UrlParser from '$lib/urlParser';
+	import type { Animation, AnimationEasing, AnimationParams } from '$types/animation';
 	import type { UserNicknameColor } from '$types/nickname';
 </script>
 
@@ -9,6 +10,9 @@
 	export let defaultColor: string;
 	export let customColor: UserNicknameColor;
 	export let font: string;
+	export let animation: Animation;
+	export let animationEasing: AnimationEasing;
+	export let animationParams: AnimationParams = {};
 
 	let link = '';
 
@@ -21,6 +25,9 @@
 			defaultColor = settings.defaultColor;
 			customColor = settings.nicknameColors;
 			font = settings.font;
+			animation = settings.animation;
+			animationEasing = settings.animationEasing;
+			animationParams = settings.animationParams;
 		} catch (e) {
 			link = 'incorrect link';
 		}

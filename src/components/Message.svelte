@@ -1,23 +1,75 @@
 <script lang="ts">
+	import config, { getEasing } from '$lib/config';
+	import { Animation } from '$types/animation';
 	import type { ChatMessage } from '$types/chat';
-	import { fade, slide } from 'svelte/transition';
+	import { fade, scale, slide } from 'svelte/transition';
 	import Text from './Text.svelte';
 	import UserName from './UserName.svelte';
 
 	export let chatMessage: ChatMessage;
 </script>
 
-<div in:slide out:fade class="chat-message">
-	<div class="layout">
-		<div class="mds">
-			<UserName
-				color={chatMessage.user.color}
-				userBadges={chatMessage.badgeNames}
-				nickname={chatMessage.user.displayName}
-			/><Text message={chatMessage.message} />
+{#if $config.animation === Animation.Slide}
+	<div
+		in:slide={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
+		out:fade
+		class="chat-message"
+	>
+		<div class="layout">
+			<div class="mds">
+				<UserName
+					color={chatMessage.user.color}
+					userBadges={chatMessage.badgeNames}
+					nickname={chatMessage.user.displayName}
+				/><Text message={chatMessage.message} />
+			</div>
 		</div>
 	</div>
-</div>
+{:else if $config.animation === Animation.Fade}
+	<div
+		in:fade={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
+		out:fade
+		class="chat-message"
+	>
+		<div class="layout">
+			<div class="mds">
+				<UserName
+					color={chatMessage.user.color}
+					userBadges={chatMessage.badgeNames}
+					nickname={chatMessage.user.displayName}
+				/><Text message={chatMessage.message} />
+			</div>
+		</div>
+	</div>
+{:else if $config.animation === Animation.Scale}
+	<div
+		in:scale={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
+		out:fade
+		class="chat-message"
+	>
+		<div class="layout">
+			<div class="mds">
+				<UserName
+					color={chatMessage.user.color}
+					userBadges={chatMessage.badgeNames}
+					nickname={chatMessage.user.displayName}
+				/><Text message={chatMessage.message} />
+			</div>
+		</div>
+	</div>
+{:else}
+	<div class="chat-message">
+		<div class="layout">
+			<div class="mds">
+				<UserName
+					color={chatMessage.user.color}
+					userBadges={chatMessage.badgeNames}
+					nickname={chatMessage.user.displayName}
+				/><Text message={chatMessage.message} />
+			</div>
+		</div>
+	</div>
+{/if}
 
 <style>
 	.chat-message {

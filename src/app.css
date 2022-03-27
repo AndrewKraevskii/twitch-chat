@@ -17,7 +17,8 @@ h1 {
 	font-size: 3rem;
 }
 
-input {
+input,
+select {
 	font-size: 1.2rem;
 	padding: 0.25rem 0.5rem;
 	border-radius: 8px;
@@ -40,7 +41,8 @@ input[type='checkbox'] {
 	padding: 0;
 }
 
-input:focus {
+input:focus,
+select {
 	border-color: #8cf2a5;
 	outline: none;
 }
