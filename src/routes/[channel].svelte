@@ -82,16 +82,13 @@
 	};
 
 	const loadNicknameConfigFromHref = () => {
-		const urlParser = new UrlParser(window.location.href);
+		const { hiddenNicknames, defaultColor, nicknameColors } = new UrlParser(
+			window.location.href
+		).getSettings();
 
-		if (urlParser.getHiddenNicknames().length !== 0) {
-			nicknameConfig.setHidden(urlParser.getHiddenNicknames());
-		}
-
-		if (!!urlParser.getDefaultColor()) nicknameConfig.setDefaultColor(urlParser.getDefaultColor());
-
-		if (!!urlParser.getNicknameColors())
-			nicknameConfig.setCustomColor(urlParser.getNicknameColors());
+		nicknameConfig.setHidden(hiddenNicknames);
+		nicknameConfig.setDefaultColor(defaultColor);
+		nicknameConfig.setCustomColor(nicknameColors);
 	};
 
 	onMount(async () => {

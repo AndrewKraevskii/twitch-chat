@@ -13,12 +13,12 @@
 
 	const load = () => {
 		try {
-			const urlParser = new UrlParser(link);
+			const settings = new UrlParser(link).getSettings();
 
-			channel = urlParser.getChannel();
-			hiddenNicknames = urlParser.getHiddenNicknames();
-			defaultColor = urlParser.getDefaultColor();
-			customColor = urlParser.getNicknameColors();
+			channel = settings.channel;
+			hiddenNicknames = settings.hiddenNicknames;
+			defaultColor = settings.defaultColor;
+			customColor = settings.nicknameColors;
 		} catch (e) {
 			link = 'incorrect link';
 		}

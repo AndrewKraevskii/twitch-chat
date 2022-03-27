@@ -1,4 +1,5 @@
 import type { UserNicknameColor } from '$types/nickname';
+import { SettingName } from '$types/settings';
 
 class UrlEncoder {
 	private channel: string;
@@ -18,19 +19,26 @@ class UrlEncoder {
 		this.customColor = customColor;
 	}
 
-	public getLink(): URL {
-		const url = new URL(window.location.origin);
-
+	private setChannelToUrl(url: URL): URL {
 		url.pathname = '/' + this.channel;
+		return url;
+	}
 
+	private setHiddenNicknamesToUrl(url: URL): URL {
 		if (this.hiddenNicknames.length !== 0) {
-			url.searchParams.append('hidden', this.hiddenNicknames.join(','));
+			url.searchParams.append(SettingName.HiddenNicknames, this.hiddenNicknames.join(','));
 		}
+		return url;
+	}
 
+	private setDefaultColorToUrl(url: URL): URL {
 		if (this.defaultColor) {
-			url.searchParams.append('defaultColor', this.defaultColor.replace('#', ''));
+			url.searchParams.append(SettingName.DefaultColor, this.defaultColor.replace('#', ''));
 		}
+		return url;
+	}
 
+	private setCustomNicknameColorsToUrl(url: URL): URL {
 		if (Object.keys(this.customColor).length !== 0) {
 			let v = [];
 			Object.keys(this.customColor).forEach((nickname) => {
@@ -42,8 +50,18 @@ class UrlEncoder {
 				}
 			});
 
-			url.searchParams.append('custom', v.join(','));
+			url.searchParams.append(SettingName.CustomNicknameColors, v.join(','));
 		}
+		return url;
+	}
+
+	public getLink(): URL {
+		let url = new URL(window.location.origin);
+
+		url = this.setChannelToUrl(url);
+		url = this.setHiddenNicknamesToUrl(url);
+		url = this.setDefaultColorToUrl(url);
+		url = this.setCustomNicknameColorsToUrl(url);
 
 		return url;
 	}
