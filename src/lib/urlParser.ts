@@ -31,6 +31,8 @@ class UrlParser {
 		let colors: UserNicknameColor = {};
 		const custom = this.url.searchParams.get('custom');
 
+		if (!custom) return colors;
+
 		custom.split(',').forEach((nicknameWithColors) => {
 			const [nickname, start, end] = nicknameWithColors.split(':');
 			if (!end) {
