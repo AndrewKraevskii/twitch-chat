@@ -9,9 +9,9 @@
 	const updateBadgeImages = () => {
 		badgeImages = userBadges
 			.map((badge) => {
-				const versions = $badges?.filter((b) => b.set_id === badge.set_id)[0]?.versions;
+				const versions = $badges?.find((b) => b.set_id === badge.set_id)?.versions;
 				if (!versions) return new Date().toISOString();
-				const version = versions.filter((v) => v.id === badge.version)[0];
+				const version = versions.find((v) => v.id === badge.version);
 				if (!version) return new Date().toISOString();
 				return version.image_url_4x ?? new Date().toISOString();
 			})
