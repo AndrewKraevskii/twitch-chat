@@ -13,11 +13,13 @@ const createChat = () => {
 				const newArr = [...v, { ...msg, time: new Date().getTime() }];
 				return newArr.sort((a, b) => b.time - a.time).slice(0, 20);
 			});
-			window.document
-				.querySelectorAll("head style:not([type='text/css']):not(:last-child)")
-				.forEach((v) => {
+			// I think, style tags in head needs to transition effect in svelte
+			const elements = window.document.querySelectorAll("head style:not([type='text/css'])");
+			elements.forEach((v, i) => {
+				if (i < 5 && elements.length > 20) {
 					v.remove();
-				});
+				}
+			});
 		},
 		remove: (messageId: string) => {
 			update((v) => v.filter((i) => i.id !== messageId));
