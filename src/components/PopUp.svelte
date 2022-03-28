@@ -12,7 +12,7 @@
 	});
 </script>
 
-{#if !!$popup}
+{#if $popup}
 	<section class="popup-wrapper" transition:fade>
 		<article class="popup">{$popup}</article>
 	</section>

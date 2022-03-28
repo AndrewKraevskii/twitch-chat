@@ -41,7 +41,7 @@ const createConfig = () => {
 			color?: string,
 			gradient?: { start: string; end: string }
 		) => {
-			if (!!color) {
+			if (color) {
 				if (!isColor(color)) return;
 				update((v) => ({
 					...v,
@@ -50,7 +50,7 @@ const createConfig = () => {
 						[nickname]: color
 					}
 				}));
-			} else if (!!gradient) {
+			} else if (gradient) {
 				if (!isColor(gradient.start) || !isColor(gradient.end)) return;
 				update((v) => ({
 					...v,

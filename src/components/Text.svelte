@@ -25,7 +25,7 @@
 				wordsOrEmotes.push({ service: 'twitch', value: v });
 				return;
 			}
-			if (!!$stvemotes.filter((e) => e.name === v)[0]) {
+			if ($stvemotes.find((e) => e.name === v)) {
 				if (text !== '') {
 					wordsOrEmotes.push({ value: text.trim() });
 					text = '';
@@ -33,7 +33,7 @@
 				wordsOrEmotes.push({ service: 'stv', value: v });
 				return;
 			}
-			if (!!$bttvemotes.emotes.filter((e) => e.code === v)[0]) {
+			if ($bttvemotes.emotes.find((e) => e.code === v)) {
 				if (text !== '') {
 					wordsOrEmotes.push({ value: text.trim() });
 					text = '';
@@ -41,7 +41,7 @@
 				wordsOrEmotes.push({ service: 'bttv', value: v });
 				return;
 			}
-			if (!!$ffzemotes.filter((e) => e.name === v)[0]) {
+			if ($ffzemotes.find((e) => e.name === v)) {
 				if (text !== '') {
 					wordsOrEmotes.push({ value: text.trim() });
 					text = '';
@@ -65,18 +65,18 @@
 				case 'bttv': {
 					const image = $bttvemotes.template.replace(
 						'{id}',
-						$bttvemotes.emotes.filter((e) => e.code === v.value)[0].id
+						$bttvemotes.emotes.find((e) => e.code === v.value).id
 					);
 					return `<span class="emote"><span style="width: 0.5em; height: 0.5em;"><img class="emote-image" src="${image}"></span></span>`;
 				}
 				case 'stv': {
-					const image = $stvemotes.filter((e) => e.name === v.value)[0].urls[
-						$stvemotes.filter((e) => e.name === v.value)[0].urls.length - 1
+					const image = $stvemotes.find((e) => e.name === v.value).urls[
+						$stvemotes.find((e) => e.name === v.value).urls.length - 1
 					][1];
 					return `<span class="emote"><span style="width: 0.5em; height: 0.5em;"><img class="emote-image" src="${image}"></span></span>`;
 				}
 				case 'ffz': {
-					const ffzEmote = $ffzemotes.filter((e) => e.name === v.value)[0];
+					const ffzEmote = $ffzemotes.find((e) => e.name === v.value);
 					const keys = Object.keys(ffzEmote.urls);
 					const image = `https:${ffzEmote.urls[keys[keys.length - 1]]}`;
 					return `<span class="emote"><span style="width: 0.5em; height: 0.5em;"><img class="emote-image" src="${image}"></span></span>`;

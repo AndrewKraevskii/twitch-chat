@@ -69,7 +69,7 @@
 
 		const badgeNames: ChatTwitchBadge[] = _raw
 			.split(';')
-			.filter((v) => v.includes('badges='))[0]
+			.find((v) => v.includes('badges='))
 			.split('=')[1]
 			.split(',')
 			.map((v) => ({
