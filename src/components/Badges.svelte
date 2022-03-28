@@ -10,12 +10,9 @@
 		badgeImages = userBadges
 			.map((badge) => {
 				const versions = $badges?.find((b) => b.set_id === badge.set_id)?.versions;
-				if (!versions) return new Date().toISOString();
-				const version = versions.find((v) => v.id === badge.version);
-				if (!version) return new Date().toISOString();
-				return version.image_url_4x ?? new Date().toISOString();
+				return versions?.find((v) => v.id === badge.version)?.image_url_4x;
 			})
-			.filter((v) => v);
+			.filter(Boolean);
 	};
 
 	$: userBadges && updateBadgeImages();
