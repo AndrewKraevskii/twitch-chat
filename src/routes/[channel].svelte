@@ -126,7 +126,7 @@
 
 		twitchChat.on(Events.CLEAR_MESSAGE, handleRemoveMessage);
 
-		twitchChat.on(Events.CONNECTED, () => popup.set('Twitch: Connected!'));
+		twitchChat.on(Events.CONNECTED, () => console.log('Twitch: Connected!'));
 		twitchChat.on(Events.DISCONNECTED, () => popup.set('Twitch: Disonnected!'));
 		twitchChat.on(Events.RECONNECT, () => popup.set('Twitch: Reconnect!'));
 
