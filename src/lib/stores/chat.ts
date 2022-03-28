@@ -13,6 +13,11 @@ const createChat = () => {
 				const newArr = [...v, { ...msg, time: new Date().getTime() }];
 				return newArr.sort((a, b) => b.time - a.time).slice(0, 20);
 			});
+			window.document
+				.querySelectorAll("head style:not([type='text/css']):not(:last-child)")
+				.forEach((v) => {
+					v.remove();
+				});
 		},
 		remove: (messageId: string) => {
 			update((v) => v.filter((i) => i.id !== messageId));
