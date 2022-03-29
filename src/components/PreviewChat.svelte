@@ -97,7 +97,14 @@
 		return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
 	};
 
-	const defaultNicknames = ['BruhaBruh', 'hyperspace42_', 'nightbot', 'twitch', 'Pepega'];
+	const defaultNicknames = [
+		'BruhaBruh',
+		'hyperspace42_',
+		'nightbot',
+		'twitch',
+		'Pepega',
+		'andrewkraevskii'
+	];
 	const defaultEmotes: { emote: string; tag: EmoteTag }[] = [
 		{
 			emote: 'Kappa',
