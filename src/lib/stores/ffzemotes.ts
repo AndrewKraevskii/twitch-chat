@@ -1,9 +1,7 @@
 import type { FFZEmote } from '$types/ffz';
 import { writable } from 'svelte/store';
 
-const initialState: FFZEmote[] = [];
-
-const createEmotes = () => {
+const createEmotes = (initialState: FFZEmote[]) => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -13,6 +11,6 @@ const createEmotes = () => {
 	};
 };
 
-const ffzemotes = createEmotes();
+const ffzemotes = createEmotes([]);
 
 export default ffzemotes;

@@ -6,12 +6,7 @@ export type BTTVState = {
 	emotes: BTTVEmote[];
 };
 
-const initialState: BTTVState = {
-	template: 'https://cdn.betterttv.net/emote/{id}/3x',
-	emotes: []
-};
-
-const createEmotes = () => {
+const createEmotes = (initialState: BTTVState) => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -21,6 +16,9 @@ const createEmotes = () => {
 	};
 };
 
-const bttvemotes = createEmotes();
+const bttvemotes = createEmotes({
+	template: 'https://cdn.betterttv.net/emote/{id}/3x',
+	emotes: []
+});
 
 export default bttvemotes;

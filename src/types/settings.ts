@@ -8,7 +8,8 @@ export enum SettingName {
 	Font = 'font',
 	Animation = 'animation',
 	AnimationEasing = 'animationEasing',
-	AnimationParams = 'animationParams'
+	AnimationParams = 'animationParams',
+	HideReward = 'hideReward'
 }
 
 export type Settings = {
@@ -20,4 +21,5 @@ export type Settings = {
 	animation: Animation;
 	animationEasing: AnimationEasing;
 	animationParams: AnimationParams;
+	hideReward: boolean;
 };

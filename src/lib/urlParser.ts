@@ -5,7 +5,6 @@ import { isColor } from './config';
 
 class UrlParser {
 	private url: URL;
-	private colorRegex = /^#[a-f0-9]{6}$/i;
 
 	constructor(url: URL | string) {
 		if (typeof url === 'string') {
@@ -103,6 +102,11 @@ class UrlParser {
 		return params;
 	}
 
+	public getHideReward(): boolean {
+		const hideReward = this.url.searchParams.get(SettingName.HideReward);
+		return !!hideReward;
+	}
+
 	public getSettings(): Settings {
 		return {
 			channel: this.getChannel(),
@@ -112,7 +116,8 @@ class UrlParser {
 			font: this.getFont(),
 			animation: this.getAnimation(),
 			animationEasing: this.getAnimationEasing(),
-			animationParams: this.getAnimationParams()
+			animationParams: this.getAnimationParams(),
+			hideReward: this.getHideReward()
 		};
 	}
 }

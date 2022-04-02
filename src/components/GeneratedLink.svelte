@@ -17,6 +17,7 @@
 	export let animationEasing: AnimationEasing;
 	export let animationParams: AnimationParams = {};
 	export let customColor: UserNicknameColor = {};
+	export let hideReward = false;
 
 	const updateLink = () => {
 		if (!browser) return;
@@ -38,7 +39,8 @@
 			font,
 			animation,
 			animationEasing,
-			animationParams
+			animationParams,
+			hideReward
 		});
 
 		link = urlEncoder.getLink().href;
@@ -53,6 +55,7 @@
 		animation !== undefined &&
 		animationEasing !== undefined &&
 		animationParams &&
+		hideReward !== undefined &&
 		updateLink();
 
 	const handleClick = () => {

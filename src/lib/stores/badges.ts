@@ -1,9 +1,7 @@
 import type { TwitchBadge } from '$types/badge';
 import { writable } from 'svelte/store';
 
-const initialState: TwitchBadge[] = [];
-
-const createBadges = () => {
+const createBadges = (initialState: TwitchBadge[]) => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -13,6 +11,6 @@ const createBadges = () => {
 	};
 };
 
-const badges = createBadges();
+const badges = createBadges([]);
 
 export default badges;

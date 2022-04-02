@@ -85,6 +85,13 @@ class UrlEncoder {
 		return this;
 	}
 
+	private setHideReward(): this {
+		if (this.settings.hideReward) {
+			this.url.searchParams.append(SettingName.HideReward, '1');
+		}
+		return this;
+	}
+
 	public getLink(): URL {
 		return this.setChannel()
 			.setHiddenNicknames()
@@ -93,7 +100,8 @@ class UrlEncoder {
 			.setFont()
 			.setAnimation()
 			.setAnimationEasing()
-			.setAnimationParams().url;
+			.setAnimationParams()
+			.setHideReward().url;
 	}
 }
 

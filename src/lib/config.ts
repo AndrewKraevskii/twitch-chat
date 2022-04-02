@@ -7,16 +7,6 @@ import type { EasingFunction } from 'svelte/types/runtime/transition';
 
 export type Config = Omit<Settings, 'channel'>;
 
-const initialState: Config = {
-	hiddenNicknames: [],
-	defaultColor: '#8CF2A5',
-	nicknameColors: {},
-	font: '',
-	animation: Animation.Slide,
-	animationEasing: AnimationEasing.Linear,
-	animationParams: { delay: 0, duration: 150 }
-};
-
 const colorRegex = /^#[a-f0-9]{6}$/i;
 
 export const isColor = (color: string) => {
@@ -27,7 +17,7 @@ export const getEasing = (animationEasing: AnimationEasing): EasingFunction => {
 	return easing[animationEasing];
 };
 
-const createConfig = () => {
+const createConfig = (initialState: Config) => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -79,10 +69,20 @@ const createConfig = () => {
 			if (JSON.stringify(animationParams) === JSON.stringify({})) return;
 			update((v) => ({ ...v, animationParams }));
 		},
+		setHideReward: (hideReward: boolean) => update((v) => ({ ...v, hideReward })),
 		reset: () => set(initialState)
 	};
 };
 
-const config = createConfig();
+const config = createConfig({
+	hiddenNicknames: [],
+	defaultColor: '#8CF2A5',
+	nicknameColors: {},
+	font: '',
+	animation: Animation.Slide,
+	animationEasing: AnimationEasing.Linear,
+	animationParams: { delay: 0, duration: 150 },
+	hideReward: true
+});
 
 export default config;

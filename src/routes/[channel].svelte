@@ -54,6 +54,7 @@
 		isSelf
 	}) => {
 		if (
+			($config.hideReward && /custom-reward-id=/.test(_raw)) ||
 			message.startsWith('!') ||
 			$config.hiddenNicknames.map((n) => n.toLowerCase()).includes(tags.username.toLowerCase()) ||
 			isSelf
@@ -125,6 +126,8 @@
 		twitchChat.on(Events.PRIVATE_MESSAGE, handleNewMessage);
 
 		twitchChat.on(Events.CLEAR_MESSAGE, handleRemoveMessage);
+
+		twitchChat.on(Events.CLEAR_CHAT, () => chat.clear());
 
 		twitchChat.on(Events.CONNECTED, () => console.log('Twitch: Connected!'));
 		twitchChat.on(Events.DISCONNECTED, () => popup.set('Twitch: Disonnected!'));

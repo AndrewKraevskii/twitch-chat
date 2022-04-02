@@ -10,6 +10,7 @@
 	import Footer from '@components/Footer.svelte';
 	import GeneratedLink from '@components/GeneratedLink.svelte';
 	import HiddenNicknamesInput from '@components/HiddenNicknamesInput.svelte';
+	import HideRewardInput from '@components/HideRewardInput.svelte';
 	import LoadLinkInput from '@components/LoadLinkInput.svelte';
 	import PreviewChat from '@components/PreviewChat.svelte';
 </script>
@@ -23,6 +24,7 @@
 	let animation: Animation = Animation.Slide;
 	let animationEasing: AnimationEasing = AnimationEasing.Linear;
 	let animationParams: AnimationParams = {};
+	let hideReward = false;
 
 	let debouncedChannel = '';
 
@@ -49,6 +51,10 @@
 		<div class="controls">
 			<Field label="Channel">
 				<ChannelInput bind:channel />
+			</Field>
+
+			<Field label="Hide rewards">
+				<HideRewardInput bind:hideReward />
 			</Field>
 
 			<Field label="Default color">
@@ -92,6 +98,7 @@
 					{animation}
 					{animationEasing}
 					{animationParams}
+					{hideReward}
 				/>
 			</Field>
 
@@ -105,6 +112,7 @@
 					bind:animation
 					bind:animationEasing
 					bind:animationParams
+					bind:hideReward
 				/>
 			</Field>
 		</div>

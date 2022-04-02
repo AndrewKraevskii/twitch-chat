@@ -1,9 +1,7 @@
 import type { STVEmote } from '$types/stv';
 import { writable } from 'svelte/store';
 
-const initialState: STVEmote[] = [];
-
-const createEmotes = () => {
+const createEmotes = (initialState: STVEmote[]) => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -13,6 +11,6 @@ const createEmotes = () => {
 	};
 };
 
-const stvemotes = createEmotes();
+const stvemotes = createEmotes([]);
 
 export default stvemotes;

@@ -1,9 +1,7 @@
 import type { ChatMessage } from '$types/chat';
 import { writable } from 'svelte/store';
 
-const initialState: ChatMessage[] = [];
-
-const createChat = () => {
+const createChat = (initialState: ChatMessage[]) => {
 	const { set, update, subscribe } = writable(initialState);
 
 	return {
@@ -28,6 +26,6 @@ const createChat = () => {
 	};
 };
 
-const chat = createChat();
+const chat = createChat([]);
 
 export default chat;

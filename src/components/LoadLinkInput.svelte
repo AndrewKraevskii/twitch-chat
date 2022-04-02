@@ -13,6 +13,7 @@
 	export let animation: Animation;
 	export let animationEasing: AnimationEasing;
 	export let animationParams: AnimationParams = {};
+	export let hideReward: boolean;
 
 	let link = '';
 
@@ -28,6 +29,7 @@
 			animation = settings.animation;
 			animationEasing = settings.animationEasing;
 			animationParams = settings.animationParams;
+			hideReward = settings.hideReward;
 		} catch (e) {
 			link = 'incorrect link';
 		}
