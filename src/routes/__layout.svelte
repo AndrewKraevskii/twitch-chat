@@ -11,6 +11,7 @@
 
 	config.subscribe((v) => {
 		if (!browser) return;
+		console.log(v.fontSize);
 		document.documentElement.style.fontSize = v.fontSize + 'px';
 	});
 </script>

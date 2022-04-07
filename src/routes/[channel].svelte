@@ -94,7 +94,10 @@
 			font,
 			animation,
 			animationEasing,
-			animationParams
+			animationParams,
+			hideReward,
+			disablePadding,
+			fontSize
 		} = new UrlParser(window.location.href).getSettings();
 
 		config.setHidden(hiddenNicknames);
@@ -104,6 +107,9 @@
 		config.setAnimation(animation);
 		config.setAnimationEasing(animationEasing);
 		config.setAnimationParams(animationParams);
+		config.setHideReward(hideReward);
+		config.setDisablePadding(disablePadding);
+		config.setFontSize(fontSize);
 	};
 
 	onMount(async () => {
@@ -151,6 +157,5 @@
 		display: flex !important;
 		flex-direction: column-reverse !important;
 		height: 100vh !important;
-		padding: 1rem !important;
 	}
 </style>
