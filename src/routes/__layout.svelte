@@ -17,7 +17,15 @@
 </script>
 
 <div
+	class="body"
 	style={`font-family: ${customFont}'Golos UI VF', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;`}
 >
 	<slot />
 </div>
+
+<style>
+	.body {
+		display: grid;
+		max-height: 100vh;
+	}
+</style>

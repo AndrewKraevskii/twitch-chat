@@ -115,7 +115,7 @@
 	onMount(async () => {
 		if (!browser) return;
 
-		if (!$config.disablePadding) document.body.classList.add('with-padding');
+		if (!$config.disablePadding) document.querySelector('.body').classList.add('with-padding');
 
 		loadConfigFromHref();
 
