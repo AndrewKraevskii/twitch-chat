@@ -9,6 +9,7 @@
 	export let userBadges: ChatTwitchBadge[];
 	export let color: string | null;
 	export let nickname: string;
+	export let withSeparator = true;
 
 	let nicknameStartColor: string | undefined = undefined;
 	let nicknameEndColor: string | undefined = undefined;
@@ -58,7 +59,7 @@
 			nicknameEndColor ?? $config.defaultColor
 		}); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent`}
 		>{nickname}</span
-	><Separator />
+	>{#if withSeparator}<Separator />{/if}
 </div>
 
 <style>

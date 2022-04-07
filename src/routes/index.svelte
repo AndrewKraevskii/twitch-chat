@@ -1,9 +1,11 @@
 <script lang="ts" context="module">
 	import { Animation, AnimationEasing, type AnimationParams } from '$types/animation';
 	import type { UserNicknameColor } from '$types/nickname';
+	import type { ChatType } from '$types/settings';
 	import AnimationParamsInput from '@components/AnimationParamsInput.svelte';
 	import AnimationSelect from '@components/AnimationSelect.svelte';
 	import ChannelInput from '@components/ChannelInput.svelte';
+	import ChatTypeInput from '@components/ChatTypeInput.svelte';
 	import CustomColorInput from '@components/CustomColorInput.svelte';
 	import DefaultColorInput from '@components/DefaultColorInput.svelte';
 	import DisablePaddingInput from '@components/DisablePaddingInput.svelte';
@@ -31,6 +33,7 @@
 	let disablePadding = false;
 	let fontSize = 16;
 	let gradientOnlyCustom = false;
+	let chatType: ChatType = 'default';
 
 	let debouncedChannel = '';
 
@@ -57,6 +60,10 @@
 		<div class="controls">
 			<Field label="Channel">
 				<ChannelInput bind:channel />
+			</Field>
+
+			<Field label="ChatType">
+				<ChatTypeInput bind:chatType />
 			</Field>
 
 			<Field label="Hide rewards">
@@ -120,6 +127,7 @@
 					{disablePadding}
 					{fontSize}
 					{gradientOnlyCustom}
+					{chatType}
 				/>
 			</Field>
 
@@ -137,6 +145,7 @@
 					bind:disablePadding
 					bind:fontSize
 					bind:gradientOnlyCustom
+					bind:chatType
 				/>
 			</Field>
 		</div>

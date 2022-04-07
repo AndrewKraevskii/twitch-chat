@@ -2,6 +2,7 @@
 	import UrlParser from '$lib/urlParser';
 	import type { Animation, AnimationEasing, AnimationParams } from '$types/animation';
 	import type { UserNicknameColor } from '$types/nickname';
+	import type { ChatType } from '$types/settings';
 </script>
 
 <script lang="ts">
@@ -17,6 +18,7 @@
 	export let disablePadding: boolean;
 	export let fontSize: number;
 	export let gradientOnlyCustom: boolean;
+	export let chatType: ChatType;
 
 	let link = '';
 
@@ -36,6 +38,7 @@
 			disablePadding = settings.disablePadding;
 			fontSize = settings.fontSize;
 			gradientOnlyCustom = settings.gradientOnlyCustom;
+			chatType = settings.chatType;
 		} catch (e) {
 			link = 'incorrect link';
 		}

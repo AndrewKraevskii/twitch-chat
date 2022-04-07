@@ -4,6 +4,7 @@
 	import UrlEncoder from '$lib/urlEncoder';
 	import type { Animation, AnimationEasing, AnimationParams } from '$types/animation';
 	import type { UserNicknameColor } from '$types/nickname';
+	import type { ChatType } from '$types/settings';
 </script>
 
 <script lang="ts">
@@ -21,6 +22,7 @@
 	export let disablePadding = false;
 	export let fontSize = 16;
 	export let gradientOnlyCustom = false;
+	export let chatType: ChatType = 'default';
 
 	const updateLink = () => {
 		if (!browser) return;
@@ -36,6 +38,7 @@
 		config.setDisablePadding(disablePadding);
 		config.setFontSize(fontSize);
 		config.setGradientOnlyCustom(gradientOnlyCustom);
+		config.setChatType(chatType);
 
 		const urlEncoder = new UrlEncoder({
 			channel,
@@ -49,7 +52,8 @@
 			hideReward,
 			disablePadding,
 			fontSize,
-			gradientOnlyCustom
+			gradientOnlyCustom,
+			chatType
 		});
 
 		link = urlEncoder.getLink().href;
@@ -68,6 +72,7 @@
 		disablePadding !== undefined &&
 		fontSize !== undefined &&
 		gradientOnlyCustom !== undefined &&
+		chatType !== undefined &&
 		updateLink();
 
 	const handleClick = () => {

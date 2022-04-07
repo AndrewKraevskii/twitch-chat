@@ -1,6 +1,6 @@
 import { Animation, AnimationEasing, type AnimationParams } from '$types/animation';
 import type { UserNicknameColor } from '$types/nickname';
-import type { Settings } from '$types/settings';
+import type { ChatType, Settings } from '$types/settings';
 import * as easing from 'svelte/easing';
 import { writable } from 'svelte/store';
 import type { EasingFunction } from 'svelte/types/runtime/transition';
@@ -74,6 +74,7 @@ const createConfig = (initialState: Config) => {
 		setFontSize: (fontSize: number) => update((v) => ({ ...v, fontSize })),
 		setGradientOnlyCustom: (gradientOnlyCustom: boolean) =>
 			update((v) => ({ ...v, gradientOnlyCustom })),
+		setChatType: (chatType: ChatType) => update((v) => ({ ...v, chatType })),
 		reset: () => set(initialState)
 	};
 };
@@ -89,7 +90,8 @@ const config = createConfig({
 	hideReward: false,
 	disablePadding: false,
 	fontSize: 8,
-	gradientOnlyCustom: false
+	gradientOnlyCustom: false,
+	chatType: 'default'
 });
 
 export default config;

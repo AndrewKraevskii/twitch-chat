@@ -13,6 +13,8 @@
 	import faker from '@faker-js/faker';
 	import { onDestroy } from 'svelte';
 	import type { EmoteTag } from 'twitch-js';
+	import BlockChat from './BlockChat.svelte';
+	import BlockWithHeadChat from './BlockWithHeadChat.svelte';
 	import DefaultChat from './DefaultChat.svelte';
 </script>
 
@@ -213,7 +215,13 @@
 </script>
 
 <div class="body_replica" class:with-padding={!$config.disablePadding}>
-	<DefaultChat />
+	{#if $config.chatType === 'block'}
+		<BlockChat />
+	{:else if $config.chatType === 'blockWithHead'}
+		<BlockWithHeadChat />
+	{:else}
+		<DefaultChat />
+	{/if}
 </div>
 
 <style>

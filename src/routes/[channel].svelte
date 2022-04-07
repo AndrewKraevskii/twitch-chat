@@ -9,6 +9,8 @@
 	import UrlParser from '$lib/urlParser';
 	import type { ChatTwitchBadge, TwitchBadge } from '$types/badge';
 	import type { NewMessageResponse } from '$types/twitch';
+	import BlockChat from '@components/BlockChat.svelte';
+	import BlockWithHeadChat from '@components/BlockWithHeadChat.svelte';
 	import DefaultChat from '@components/DefaultChat.svelte';
 	import PopUp from '@components/PopUp.svelte';
 	import type { Load } from '@sveltejs/kit';
@@ -98,7 +100,8 @@
 			hideReward,
 			disablePadding,
 			fontSize,
-			gradientOnlyCustom
+			gradientOnlyCustom,
+			chatType
 		} = new UrlParser(window.location.href).getSettings();
 
 		config.setHidden(hiddenNicknames);
@@ -112,6 +115,7 @@
 		config.setDisablePadding(disablePadding);
 		config.setFontSize(fontSize);
 		config.setGradientOnlyCustom(gradientOnlyCustom);
+		config.setChatType(chatType);
 	};
 
 	onMount(async () => {
@@ -152,7 +156,13 @@
 </script>
 
 <PopUp />
-<DefaultChat />
+{#if $config.chatType === 'block'}
+	<BlockChat />
+{:else if $config.chatType === 'blockWithHead'}
+	<BlockWithHeadChat />
+{:else}
+	<DefaultChat />
+{/if}
 
 <style>
 	:global(body) {

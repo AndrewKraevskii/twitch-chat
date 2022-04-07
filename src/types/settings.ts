@@ -12,8 +12,11 @@ export enum SettingName {
 	HideReward = 'hideReward',
 	DisablePadding = 'disablePadding',
 	FontSize = 'fontSize',
-	GradientOnlyCustom = 'gradientOnly'
+	GradientOnlyCustom = 'gradientOnly',
+	ChatType = 'chatType'
 }
+
+export type ChatType = 'default' | 'block' | 'blockWithHead';
 
 export type Settings = {
 	channel: string;
@@ -28,4 +31,5 @@ export type Settings = {
 	disablePadding: boolean;
 	fontSize: number;
 	gradientOnlyCustom: boolean;
+	chatType: ChatType;
 };

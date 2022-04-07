@@ -1,6 +1,6 @@
 import { Animation, AnimationEasing, type AnimationParams } from '$types/animation';
 import type { UserNicknameColor } from '$types/nickname';
-import { SettingName, type Settings } from '$types/settings';
+import { SettingName, type ChatType, type Settings } from '$types/settings';
 import { isColor } from './config';
 
 class UrlParser {
@@ -126,6 +126,11 @@ class UrlParser {
 		return !!gradientOnlyCustom;
 	}
 
+	public getChatType(): ChatType {
+		const chatType = this.url.searchParams.get(SettingName.ChatType) as ChatType;
+		return chatType;
+	}
+
 	public getSettings(): Settings {
 		return {
 			channel: this.getChannel(),
@@ -139,7 +144,8 @@ class UrlParser {
 			hideReward: this.getHideReward(),
 			disablePadding: this.getDisablePadding(),
 			fontSize: this.getFontSize(),
-			gradientOnlyCustom: this.getGradientOnlyCustom()
+			gradientOnlyCustom: this.getGradientOnlyCustom(),
+			chatType: this.getChatType()
 		};
 	}
 }

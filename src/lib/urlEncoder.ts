@@ -113,9 +113,17 @@ class UrlEncoder {
 		return this;
 	}
 
+	private setChatType(): this {
+		if (this.settings.chatType !== 'default') {
+			this.url.searchParams.append(SettingName.ChatType, this.settings.chatType);
+		}
+		return this;
+	}
+
 	public getLink(): URL {
 		return this.setChannel()
 			.setFontSize()
+			.setChatType()
 			.setHiddenNicknames()
 			.setDefaultColor()
 			.setCustomNicknameColors()
