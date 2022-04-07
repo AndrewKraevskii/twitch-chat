@@ -26,8 +26,7 @@
 	</div>
 {:else if $config.animation === Animation.Fade}
 	<div
-		in:fade={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
-		out:fade
+		transition:fade={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
 		class="chat-message"
 	>
 		<div class="layout">
@@ -42,8 +41,7 @@
 	</div>
 {:else if $config.animation === Animation.Scale}
 	<div
-		in:scale={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
-		out:fade
+		transition:scale={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
 		class="chat-message"
 	>
 		<div class="layout">
