@@ -12,7 +12,6 @@
 {#if $config.animation === Animation.Slide}
 	<div
 		in:slide={{ ...$config.animationParams, easing: getEasing($config.animationEasing) }}
-		out:fade
 		class="chat-message"
 	>
 		<div class="layout">
