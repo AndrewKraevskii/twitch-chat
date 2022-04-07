@@ -57,12 +57,12 @@
 				<HideRewardInput bind:hideReward />
 			</Field>
 
-			<Field label="Default color">
-				<DefaultColorInput bind:defaultColor />
-			</Field>
-
 			<Field label="Hidden nicknames">
 				<HiddenNicknamesInput bind:hiddenNicknames />
+			</Field>
+
+			<Field label="Default color">
+				<DefaultColorInput bind:defaultColor />
 			</Field>
 
 			<Field label="Custom color nicknames">
@@ -116,27 +116,28 @@
 				/>
 			</Field>
 		</div>
-		<PreviewChat channel={debouncedChannel} />
+		<div>
+			<PreviewChat channel={debouncedChannel} />
+			<Footer />
+		</div>
 	</div>
-
-	<Footer />
 </main>
 
 <style>
 	.container {
 		max-width: 1280px;
 		margin: 0 auto;
-		padding: 2rem 1rem;
+		padding: 32px 16px;
 	}
 
 	.heading {
-		margin-bottom: 1rem;
+		margin-bottom: 16px;
 		color: #171717;
 	}
 	.columns {
 		display: grid;
-		grid-template-columns: 2fr 1fr;
-		grid-gap: 4rem;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 64px;
 	}
 	.controls {
 		grid-column: 1 / 2;

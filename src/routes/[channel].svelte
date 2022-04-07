@@ -9,11 +9,10 @@
 	import UrlParser from '$lib/urlParser';
 	import type { ChatTwitchBadge, TwitchBadge } from '$types/badge';
 	import type { NewMessageResponse } from '$types/twitch';
-	import Message from '@components/Message.svelte';
+	import DefaultChat from '@components/DefaultChat.svelte';
 	import PopUp from '@components/PopUp.svelte';
 	import type { Load } from '@sveltejs/kit';
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
 	import { Events } from 'twitch-js';
 
 	export const prerender = true;
@@ -143,39 +142,13 @@
 </script>
 
 <PopUp />
-{#if $chat.length !== 0}
-	<main class="chat-container" transition:fade>
-		{#each $chat.sort((a, b) => b.time - a.time) as msg (msg.id)}
-			<Message chatMessage={msg} />
-		{/each}
-	</main>
-{/if}
+<DefaultChat />
 
 <style>
-	.chat-container {
-		font-size: 2rem;
-		background-color: rgba(17, 17, 17, 0.75);
-		border-radius: 1rem;
-		padding: 1rem 1rem 0.85rem 1rem;
-		max-height: 100%;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column-reverse;
-		align-items: stretch;
-	}
-
-	:global(.chat-container > *) {
-		margin-top: 0.5rem;
-	}
-
-	:global(.chat-container > *:last-child) {
-		margin-top: 0rem;
-	}
-
 	:global(body) {
 		display: flex !important;
 		flex-direction: column-reverse !important;
 		height: 100vh !important;
-		padding: 1.5rem !important;
+		padding: 1rem !important;
 	}
 </style>

@@ -75,6 +75,6 @@
 	}
 	.generated-link {
 		flex: 1;
-		margin-right: 0.5rem;
+		margin-right: 8px;
 	}
 </style>

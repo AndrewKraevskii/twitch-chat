@@ -11,16 +11,17 @@
 
 <style>
 	footer {
-		padding: 1rem 0;
+		padding: 16px 0;
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		color: #171717;
+		font-size: 16px;
 	}
 
 	h6 {
-		font-size: 1rem;
+		font-size: inherit;
 	}
 
 	a {

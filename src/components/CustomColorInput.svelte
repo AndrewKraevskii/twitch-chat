@@ -54,21 +54,21 @@
 
 <style>
 	.custom-color-header {
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 	}
 
 	.nickname-wrapper {
 		display: flex;
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 	}
 
 	.color-wrapper {
 		display: flex;
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 	}
 
 	.color-wrapper > * {
-		margin-right: 0.25rem;
+		margin-right: 4px;
 	}
 
 	.color-wrapper > *:last-child {
@@ -77,22 +77,22 @@
 
 	.nickname-input {
 		flex: 1;
-		margin-right: 0.5rem;
+		margin-right: 8px;
 	}
 
 	.is-gradient {
-		font-size: 1.25rem;
+		font-size: 20px;
 		display: flex;
 		align-items: center;
 	}
 
 	.is-gradient input {
-		margin-right: 0.25rem;
+		margin-right: 4px;
 	}
 
 	.nickname-list {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 0.25rem;
+		gap: 4px;
 	}
 </style>

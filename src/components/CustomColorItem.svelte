@@ -34,9 +34,9 @@
 	}
 
 	.custom-color p {
-		margin-right: 0.5rem;
+		margin-right: 8px;
 		flex: 1;
 		font-weight: 500;
-		font-size: 1.1rem;
+		font-size: 18px;
 	}
 </style>

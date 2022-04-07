@@ -10,11 +10,10 @@
 	import stvemotes from '$lib/stores/stvemotes';
 	import UrlParser from '$lib/urlParser';
 	import type { ChatTwitchBadge, TwitchBadge } from '$types/badge';
-	import Message from '@components/Message.svelte';
 	import faker from '@faker-js/faker';
 	import { onDestroy } from 'svelte';
-	import { fade } from 'svelte/transition';
 	import type { EmoteTag } from 'twitch-js';
+	import DefaultChat from './DefaultChat.svelte';
 </script>
 
 <script lang="ts">
@@ -214,13 +213,7 @@
 </script>
 
 <div class="body_replica">
-	{#if $chat.length !== 0}
-		<main class="chat-container" transition:fade>
-			{#each $chat.sort((a, b) => b.time - a.time) as msg (msg.id)}
-				<Message chatMessage={msg} />
-			{/each}
-		</main>
-	{/if}
+	<DefaultChat />
 </div>
 
 <style>
@@ -230,27 +223,9 @@
 		max-height: 576px;
 		height: 100%;
 		overflow: hidden;
-	}
-
-	.chat-container {
-		font-size: 1.5rem;
-		background-color: rgba(17, 17, 17, 0.75);
-		border-radius: 1rem;
-		padding: 1rem 1rem 0.85rem 1rem;
-		height: max-content;
-		max-height: 100%;
-		overflow: hidden;
-		display: flex;
-		flex-direction: column-reverse;
-		align-items: stretch;
-		color: #fafafa;
-	}
-
-	:global(.chat-container > *) {
-		margin-top: 0.5rem;
-	}
-
-	:global(.chat-container > *:last-child) {
-		margin-top: 0rem;
+		outline: 1px solid rgba(17, 17, 17, 0.5);
+		padding: 1rem !important;
+		position: sticky;
+		top: 32px;
 	}
 </style>

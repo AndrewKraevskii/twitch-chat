@@ -35,16 +35,16 @@
 <style>
 	.hidden-nicknames-header {
 		display: flex;
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 	}
 	.hidden-nicknames-header input {
 		flex: 1;
-		margin-right: 0.5rem;
+		margin-right: 8px;
 	}
 
 	.nickname-list {
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 0.25rem;
+		gap: 4px;
 	}
 </style>

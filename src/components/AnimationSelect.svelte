@@ -33,6 +33,6 @@
 		flex: 1;
 	}
 	.animation-wrapper > *:not(:last-child) {
-		margin-right: 0.5rem;
+		margin-right: 8px;
 	}
 </style>

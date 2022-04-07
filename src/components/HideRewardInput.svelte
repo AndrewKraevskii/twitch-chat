@@ -15,16 +15,16 @@
 <style>
 	.hide-reward-wrapper {
 		display: flex;
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 	}
 
 	.hide-reward {
-		font-size: 1.25rem;
+		font-size: 20px;
 		display: flex;
 		align-items: center;
 	}
 
 	.hide-reward input {
-		margin-right: 0.25rem;
+		margin-right: 4px;
 	}
 </style>

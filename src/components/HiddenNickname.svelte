@@ -22,8 +22,8 @@
 
 	.hidden-nickname__nickname {
 		flex: 1;
-		margin-right: 0.5rem;
+		margin-right: 8px;
 		font-weight: 500;
-		font-size: 1.1rem;
+		font-size: 18px;
 	}
 </style>

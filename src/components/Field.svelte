@@ -12,7 +12,7 @@
 
 <style>
 	.field {
-		margin-bottom: 0.5rem;
+		margin-bottom: 8px;
 		width: 100%;
 	}
 
@@ -21,6 +21,6 @@
 	}
 
 	.field__label {
-		margin-bottom: 0.25rem;
+		margin-bottom: 4px;
 	}
 </style>
