@@ -72,6 +72,8 @@ const createConfig = (initialState: Config) => {
 		setHideReward: (hideReward: boolean) => update((v) => ({ ...v, hideReward })),
 		setDisablePadding: (disablePadding: boolean) => update((v) => ({ ...v, disablePadding })),
 		setFontSize: (fontSize: number) => update((v) => ({ ...v, fontSize })),
+		setGradientOnlyCustom: (gradientOnlyCustom: boolean) =>
+			update((v) => ({ ...v, gradientOnlyCustom })),
 		reset: () => set(initialState)
 	};
 };
@@ -86,7 +88,8 @@ const config = createConfig({
 	animationParams: { delay: 0, duration: 150 },
 	hideReward: false,
 	disablePadding: false,
-	fontSize: 8
+	fontSize: 8,
+	gradientOnlyCustom: false
 });
 
 export default config;

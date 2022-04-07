@@ -16,6 +16,7 @@
 	export let hideReward: boolean;
 	export let disablePadding: boolean;
 	export let fontSize: number;
+	export let gradientOnlyCustom: boolean;
 
 	let link = '';
 
@@ -34,6 +35,7 @@
 			hideReward = settings.hideReward;
 			disablePadding = settings.disablePadding;
 			fontSize = settings.fontSize;
+			gradientOnlyCustom = settings.gradientOnlyCustom;
 		} catch (e) {
 			link = 'incorrect link';
 		}

@@ -106,6 +106,13 @@ class UrlEncoder {
 		return this;
 	}
 
+	private setGradientOnlyCustom(): this {
+		if (this.settings.gradientOnlyCustom) {
+			this.url.searchParams.append(SettingName.GradientOnlyCustom, '1');
+		}
+		return this;
+	}
+
 	public getLink(): URL {
 		return this.setChannel()
 			.setFontSize()
@@ -117,7 +124,8 @@ class UrlEncoder {
 			.setAnimationEasing()
 			.setAnimationParams()
 			.setHideReward()
-			.setDisablePadding().url;
+			.setDisablePadding()
+			.setGradientOnlyCustom().url;
 	}
 }
 

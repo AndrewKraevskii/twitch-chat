@@ -11,7 +11,8 @@ export enum SettingName {
 	AnimationParams = 'animationParams',
 	HideReward = 'hideReward',
 	DisablePadding = 'disablePadding',
-	FontSize = 'fontSize'
+	FontSize = 'fontSize',
+	GradientOnlyCustom = 'gradientOnly'
 }
 
 export type Settings = {
@@ -26,4 +27,5 @@ export type Settings = {
 	hideReward: boolean;
 	disablePadding: boolean;
 	fontSize: number;
+	gradientOnlyCustom: boolean;
 };

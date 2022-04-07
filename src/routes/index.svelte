@@ -11,6 +11,7 @@
 	import FontSizeInput from '@components/FontSizeInput.svelte';
 	import Footer from '@components/Footer.svelte';
 	import GeneratedLink from '@components/GeneratedLink.svelte';
+	import GradientOnlyCustom from '@components/GradientOnlyCustom.svelte';
 	import HiddenNicknamesInput from '@components/HiddenNicknamesInput.svelte';
 	import HideRewardInput from '@components/HideRewardInput.svelte';
 	import LoadLinkInput from '@components/LoadLinkInput.svelte';
@@ -29,6 +30,7 @@
 	let hideReward = false;
 	let disablePadding = false;
 	let fontSize = 16;
+	let gradientOnlyCustom = false;
 
 	let debouncedChannel = '';
 
@@ -67,6 +69,10 @@
 
 			<Field label="Default color">
 				<DefaultColorInput bind:defaultColor />
+			</Field>
+
+			<Field label="Gradient only for custom">
+				<GradientOnlyCustom bind:gradientOnlyCustom />
 			</Field>
 
 			<Field label="Custom color nicknames">
@@ -113,6 +119,7 @@
 					{hideReward}
 					{disablePadding}
 					{fontSize}
+					{gradientOnlyCustom}
 				/>
 			</Field>
 
@@ -129,6 +136,7 @@
 					bind:hideReward
 					bind:disablePadding
 					bind:fontSize
+					bind:gradientOnlyCustom
 				/>
 			</Field>
 		</div>
@@ -144,6 +152,7 @@
 		max-width: 1280px;
 		margin: 0 auto;
 		padding: 32px 16px;
+		width: 100%;
 	}
 
 	.heading {

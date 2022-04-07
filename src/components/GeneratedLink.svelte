@@ -20,6 +20,7 @@
 	export let hideReward = false;
 	export let disablePadding = false;
 	export let fontSize = 16;
+	export let gradientOnlyCustom = false;
 
 	const updateLink = () => {
 		if (!browser) return;
@@ -34,6 +35,7 @@
 		config.setAnimationParams(animationParams);
 		config.setDisablePadding(disablePadding);
 		config.setFontSize(fontSize);
+		config.setGradientOnlyCustom(gradientOnlyCustom);
 
 		const urlEncoder = new UrlEncoder({
 			channel,
@@ -46,7 +48,8 @@
 			animationParams,
 			hideReward,
 			disablePadding,
-			fontSize
+			fontSize,
+			gradientOnlyCustom
 		});
 
 		link = urlEncoder.getLink().href;
@@ -64,6 +67,7 @@
 		hideReward !== undefined &&
 		disablePadding !== undefined &&
 		fontSize !== undefined &&
+		gradientOnlyCustom !== undefined &&
 		updateLink();
 
 	const handleClick = () => {

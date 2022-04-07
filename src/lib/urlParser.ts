@@ -121,6 +121,11 @@ class UrlParser {
 		return 16;
 	}
 
+	public getGradientOnlyCustom(): boolean {
+		const gradientOnlyCustom = this.url.searchParams.get(SettingName.GradientOnlyCustom);
+		return !!gradientOnlyCustom;
+	}
+
 	public getSettings(): Settings {
 		return {
 			channel: this.getChannel(),
@@ -133,7 +138,8 @@ class UrlParser {
 			animationParams: this.getAnimationParams(),
 			hideReward: this.getHideReward(),
 			disablePadding: this.getDisablePadding(),
-			fontSize: this.getFontSize()
+			fontSize: this.getFontSize(),
+			gradientOnlyCustom: this.getGradientOnlyCustom()
 		};
 	}
 }

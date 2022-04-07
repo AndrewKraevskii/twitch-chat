@@ -97,7 +97,8 @@
 			animationParams,
 			hideReward,
 			disablePadding,
-			fontSize
+			fontSize,
+			gradientOnlyCustom
 		} = new UrlParser(window.location.href).getSettings();
 
 		config.setHidden(hiddenNicknames);
@@ -110,6 +111,7 @@
 		config.setHideReward(hideReward);
 		config.setDisablePadding(disablePadding);
 		config.setFontSize(fontSize);
+		config.setGradientOnlyCustom(gradientOnlyCustom);
 	};
 
 	onMount(async () => {

@@ -32,6 +32,11 @@
 		}
 
 		if (color === null) return;
+		if ($config.gradientOnlyCustom) {
+			nicknameStartColor = color;
+			nicknameEndColor = color;
+			return;
+		}
 
 		const { hue, saturation, lightness } = hexToHSL(color);
 
