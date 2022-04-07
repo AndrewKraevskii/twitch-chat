@@ -113,8 +113,12 @@ class UrlParser {
 	}
 
 	public getFontSize(): number {
-		const fontSize = this.url.searchParams.get(SettingName.DisablePadding);
-		return Number(fontSize);
+		const fontSize = this.url.searchParams.get(SettingName.FontSize);
+		try {
+			const n = Number(fontSize);
+			if (!Number.isNaN(n) && n >= 8) return n;
+		} catch (e) {}
+		return 16;
 	}
 
 	public getSettings(): Settings {
