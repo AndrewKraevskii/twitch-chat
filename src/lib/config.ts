@@ -71,6 +71,7 @@ const createConfig = (initialState: Config) => {
 		},
 		setHideReward: (hideReward: boolean) => update((v) => ({ ...v, hideReward })),
 		setDisablePadding: (disablePadding: boolean) => update((v) => ({ ...v, disablePadding })),
+		setFontSize: (fontSize: number) => update((v) => ({ ...v, fontSize })),
 		reset: () => set(initialState)
 	};
 };
@@ -84,7 +85,8 @@ const config = createConfig({
 	animationEasing: AnimationEasing.Linear,
 	animationParams: { delay: 0, duration: 150 },
 	hideReward: false,
-	disablePadding: false
+	disablePadding: false,
+	fontSize: 8
 });
 
 export default config;

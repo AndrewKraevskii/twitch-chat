@@ -19,6 +19,7 @@
 	export let customColor: UserNicknameColor = {};
 	export let hideReward = false;
 	export let disablePadding = false;
+	export let fontSize = 16;
 
 	const updateLink = () => {
 		if (!browser) return;
@@ -32,6 +33,7 @@
 		config.setAnimationEasing(animationEasing);
 		config.setAnimationParams(animationParams);
 		config.setDisablePadding(disablePadding);
+		config.setFontSize(fontSize);
 
 		const urlEncoder = new UrlEncoder({
 			channel,
@@ -43,7 +45,8 @@
 			animationEasing,
 			animationParams,
 			hideReward,
-			disablePadding
+			disablePadding,
+			fontSize
 		});
 
 		link = urlEncoder.getLink().href;
@@ -60,6 +63,7 @@
 		animationParams &&
 		hideReward !== undefined &&
 		disablePadding !== undefined &&
+		fontSize !== undefined &&
 		updateLink();
 
 	const handleClick = () => {

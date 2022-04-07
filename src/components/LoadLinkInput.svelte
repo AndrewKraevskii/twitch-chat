@@ -15,6 +15,7 @@
 	export let animationParams: AnimationParams = {};
 	export let hideReward: boolean;
 	export let disablePadding: boolean;
+	export let fontSize: number;
 
 	let link = '';
 
@@ -32,6 +33,7 @@
 			animationParams = settings.animationParams;
 			hideReward = settings.hideReward;
 			disablePadding = settings.disablePadding;
+			fontSize = settings.fontSize;
 		} catch (e) {
 			link = 'incorrect link';
 		}

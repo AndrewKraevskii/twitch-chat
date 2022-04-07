@@ -99,8 +99,16 @@ class UrlEncoder {
 		return this;
 	}
 
+	private setFontSize(): this {
+		if (this.settings.fontSize !== 16) {
+			this.url.searchParams.append(SettingName.FontSize, this.settings.fontSize.toString());
+		}
+		return this;
+	}
+
 	public getLink(): URL {
 		return this.setChannel()
+			.setFontSize()
 			.setHiddenNicknames()
 			.setDefaultColor()
 			.setCustomNicknameColors()

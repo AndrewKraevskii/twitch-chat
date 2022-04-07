@@ -8,6 +8,7 @@
 	import DefaultColorInput from '@components/DefaultColorInput.svelte';
 	import DisablePaddingInput from '@components/DisablePaddingInput.svelte';
 	import Field from '@components/Field.svelte';
+	import FontSizeInput from '@components/FontSizeInput.svelte';
 	import Footer from '@components/Footer.svelte';
 	import GeneratedLink from '@components/GeneratedLink.svelte';
 	import HiddenNicknamesInput from '@components/HiddenNicknamesInput.svelte';
@@ -27,6 +28,7 @@
 	let animationParams: AnimationParams = {};
 	let hideReward = false;
 	let disablePadding = false;
+	let fontSize = 16;
 
 	let debouncedChannel = '';
 
@@ -75,6 +77,10 @@
 				<input style="width: 100%" bind:value={font} />
 			</Field>
 
+			<Field label="Font Size">
+				<FontSizeInput bind:fontSize />
+			</Field>
+
 			<Field label="Disable padding">
 				<DisablePaddingInput bind:disablePadding />
 			</Field>
@@ -106,6 +112,7 @@
 					{animationParams}
 					{hideReward}
 					{disablePadding}
+					{fontSize}
 				/>
 			</Field>
 
@@ -121,6 +128,7 @@
 					bind:animationParams
 					bind:hideReward
 					bind:disablePadding
+					bind:fontSize
 				/>
 			</Field>
 		</div>

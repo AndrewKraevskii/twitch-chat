@@ -1,4 +1,5 @@
 <script lang="ts" context="module">
+	import { browser } from '$app/env';
 	import config from '$lib/config';
 	import '../app.css';
 
@@ -7,6 +8,11 @@
 
 <script lang="ts">
 	$: customFont = $config.font ? `'${$config.font}', ` : '';
+
+	config.subscribe((v) => {
+		if (!browser) return;
+		document.documentElement.style.fontSize = v.fontSize + 'px';
+	});
 </script>
 
 <div

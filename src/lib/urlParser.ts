@@ -112,6 +112,15 @@ class UrlParser {
 		return !!disablePadding;
 	}
 
+	public getFontSize(): number {
+		const fontSize = this.url.searchParams.get(SettingName.DisablePadding);
+		try {
+			const n = Number(fontSize);
+			if (!Number.isNaN(n) && n >= 8) return n;
+		} catch (e) {}
+		return 16;
+	}
+
 	public getSettings(): Settings {
 		return {
 			channel: this.getChannel(),
@@ -123,7 +132,8 @@ class UrlParser {
 			animationEasing: this.getAnimationEasing(),
 			animationParams: this.getAnimationParams(),
 			hideReward: this.getHideReward(),
-			disablePadding: this.getDisablePadding()
+			disablePadding: this.getDisablePadding(),
+			fontSize: this.getFontSize()
 		};
 	}
 }
