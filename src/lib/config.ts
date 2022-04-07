@@ -70,6 +70,7 @@ const createConfig = (initialState: Config) => {
 			update((v) => ({ ...v, animationParams }));
 		},
 		setHideReward: (hideReward: boolean) => update((v) => ({ ...v, hideReward })),
+		setDisablePadding: (disablePadding: boolean) => update((v) => ({ ...v, disablePadding })),
 		reset: () => set(initialState)
 	};
 };
@@ -82,7 +83,8 @@ const config = createConfig({
 	animation: Animation.Slide,
 	animationEasing: AnimationEasing.Linear,
 	animationParams: { delay: 0, duration: 150 },
-	hideReward: true
+	hideReward: false,
+	disablePadding: false
 });
 
 export default config;

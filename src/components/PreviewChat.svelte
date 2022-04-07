@@ -212,7 +212,7 @@
 	});
 </script>
 
-<div class="body_replica">
+<div class="body_replica" class:with-padding={!$config.disablePadding}>
 	<DefaultChat />
 </div>
 
@@ -224,6 +224,5 @@
 		height: 100%;
 		overflow: hidden;
 		outline: 1px solid rgba(17, 17, 17, 0.5);
-		padding: 1rem !important;
 	}
 </style>

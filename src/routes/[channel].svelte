@@ -109,6 +109,8 @@
 	onMount(async () => {
 		if (!browser) return;
 
+		if (!$config.disablePadding) document.body.classList.add('with-padding');
+
 		loadConfigFromHref();
 
 		badges.set(tbadges);

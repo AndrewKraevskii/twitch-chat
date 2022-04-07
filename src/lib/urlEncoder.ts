@@ -92,6 +92,13 @@ class UrlEncoder {
 		return this;
 	}
 
+	private setDisablePadding(): this {
+		if (this.settings.disablePadding) {
+			this.url.searchParams.append(SettingName.DisablePadding, '1');
+		}
+		return this;
+	}
+
 	public getLink(): URL {
 		return this.setChannel()
 			.setHiddenNicknames()
@@ -101,7 +108,8 @@ class UrlEncoder {
 			.setAnimation()
 			.setAnimationEasing()
 			.setAnimationParams()
-			.setHideReward().url;
+			.setHideReward()
+			.setDisablePadding().url;
 	}
 }
 

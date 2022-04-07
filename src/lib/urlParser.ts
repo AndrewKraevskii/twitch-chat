@@ -107,6 +107,11 @@ class UrlParser {
 		return !!hideReward;
 	}
 
+	public getDisablePadding(): boolean {
+		const disablePadding = this.url.searchParams.get(SettingName.DisablePadding);
+		return !!disablePadding;
+	}
+
 	public getSettings(): Settings {
 		return {
 			channel: this.getChannel(),
@@ -117,7 +122,8 @@ class UrlParser {
 			animation: this.getAnimation(),
 			animationEasing: this.getAnimationEasing(),
 			animationParams: this.getAnimationParams(),
-			hideReward: this.getHideReward()
+			hideReward: this.getHideReward(),
+			disablePadding: this.getDisablePadding()
 		};
 	}
 }

@@ -14,6 +14,7 @@
 	export let animationEasing: AnimationEasing;
 	export let animationParams: AnimationParams = {};
 	export let hideReward: boolean;
+	export let disablePadding: boolean;
 
 	let link = '';
 
@@ -30,6 +31,7 @@
 			animationEasing = settings.animationEasing;
 			animationParams = settings.animationParams;
 			hideReward = settings.hideReward;
+			disablePadding = settings.disablePadding;
 		} catch (e) {
 			link = 'incorrect link';
 		}

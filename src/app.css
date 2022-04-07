@@ -69,3 +69,7 @@ button:focus {
 	border-color: #8cf2a5;
 	outline: none;
 }
+
+.with-padding {
+	padding: 1rem !important;
+}

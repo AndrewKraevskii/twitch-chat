@@ -6,6 +6,7 @@
 	import ChannelInput from '@components/ChannelInput.svelte';
 	import CustomColorInput from '@components/CustomColorInput.svelte';
 	import DefaultColorInput from '@components/DefaultColorInput.svelte';
+	import DisablePaddingInput from '@components/DisablePaddingInput.svelte';
 	import Field from '@components/Field.svelte';
 	import Footer from '@components/Footer.svelte';
 	import GeneratedLink from '@components/GeneratedLink.svelte';
@@ -25,6 +26,7 @@
 	let animationEasing: AnimationEasing = AnimationEasing.Linear;
 	let animationParams: AnimationParams = {};
 	let hideReward = false;
+	let disablePadding = false;
 
 	let debouncedChannel = '';
 
@@ -73,6 +75,10 @@
 				<input style="width: 100%" bind:value={font} />
 			</Field>
 
+			<Field label="Disable padding">
+				<DisablePaddingInput bind:disablePadding />
+			</Field>
+
 			<Field label="Animation">
 				<AnimationSelect bind:animation bind:animationEasing />
 			</Field>
@@ -99,6 +105,7 @@
 					{animationEasing}
 					{animationParams}
 					{hideReward}
+					{disablePadding}
 				/>
 			</Field>
 
@@ -113,6 +120,7 @@
 					bind:animationEasing
 					bind:animationParams
 					bind:hideReward
+					bind:disablePadding
 				/>
 			</Field>
 		</div>
