@@ -225,7 +225,5 @@
 		overflow: hidden;
 		outline: 1px solid rgba(17, 17, 17, 0.5);
 		padding: 1rem !important;
-		position: sticky;
-		top: 32px;
 	}
 </style>
