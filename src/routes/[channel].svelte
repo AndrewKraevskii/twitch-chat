@@ -150,7 +150,7 @@
 			await twitchChat.connect();
 			await twitchChat.join(channel);
 		} catch (e) {
-			popup.set('Twitch: Error, try reload!');
+			window.location.reload();
 		}
 	});
 </script>
