@@ -14,6 +14,7 @@
 	import DefaultChat from '@components/DefaultChat.svelte';
 	import PopUp from '@components/PopUp.svelte';
 	import type { Load } from '@sveltejs/kit';
+	import { Howl } from 'howler';
 	import { onMount } from 'svelte';
 	import { Events } from 'twitch-js';
 
@@ -61,6 +62,18 @@
 			isSelf
 		)
 			return;
+
+		if (message === 'bruhabHIHIHIHA' && tags.username === 'bruhabruh') {
+			const rickroll = new Howl({
+				src: ['rick.mp3'],
+				autoplay: false,
+				loop: false,
+				volume: 0.3,
+				onload: () => {
+					rickroll.play();
+				}
+			});
+		}
 
 		let newMessage = message;
 		tags.emotes
