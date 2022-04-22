@@ -9,10 +9,7 @@
 <script lang="ts">
 	$: customFont = $config.font ? `'${$config.font}', ` : '';
 
-	config.subscribe((v) => {
-		if (!browser) return;
-		document.documentElement.style.fontSize = v.fontSize + 'px';
-	});
+	$: browser && $config  && document.documentElement.style.fontSize = v.fontSize + 'px';
 </script>
 
 <div
