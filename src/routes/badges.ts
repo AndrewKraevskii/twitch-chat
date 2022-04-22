@@ -26,22 +26,24 @@ export const get: RequestHandler = async ({ request }) => {
 	headers.append('Authorization', `Bearer ${data.access_token}`);
 	headers.append('Client-Id', clientId.toString());
 
-	const broadcaster: {
+	const broadcasters: {
 		data: { id: string }[];
 	} = await fetch('https://api.twitch.tv/helix/users?login=' + channel, {
 		method: 'GET',
 		headers
 	}).then((r) => r.json());
-
-	if (!broadcaster.data[0])
+	
+	if (broadcaster.data.length === 0)
 		return { status: 500, body: { message: 'Error when get broadcaster id' } };
-
-	const badges = await fetchAllBadges(headers, broadcaster.data[0].id);
+	
+	const broadcasterId = broadcasters.data[0].id;
+	
+	const badges = await fetchAllBadges(headers, broadcasterId);
 
 	return {
 		body: {
 			badges,
-			broadcasterId: broadcaster.data[0].id
+			broadcasterId
 		}
 	};
 };
